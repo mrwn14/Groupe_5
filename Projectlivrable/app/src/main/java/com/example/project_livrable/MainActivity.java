@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,10 +55,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG,"username is : "+username +" password : "+password);
                 if(checkIfUserExists(username,password,snapshot)){
-                    Log.d(TAG,"I am here");
-
                     Intent registeredIntent = new Intent(getApplicationContext(), welcomePage.class);
                     registeredIntent.putExtra("firstName",loginMf.getFirstName());
                     registeredIntent.putExtra("role",loginMf.getRole());
@@ -79,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             user.setUsername(ds.getValue(helperClass.class).getUsername());
             user.setPassword(ds.getValue(helperClass.class).getPassword());
-            Log.d(TAG, user.getUsername() + "  " + user.getPassword());
             if(user.getUsername().equals(username) && user.getPassword().equals(password)){
                 Log.d(TAG,"reached here");
                 loginMf.setFirstName(ds.getValue(helperClass.class).getFirstName());
@@ -93,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         helperClass user = new helperClass();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             user.setUsername(ds.getValue(helperClass.class).getUsername());
-            Log.d(TAG, user.getUsername() + "  " + user.getPassword());
             if(user.getUsername().equals(username)){
                 return true;
             }
