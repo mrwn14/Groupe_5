@@ -13,7 +13,7 @@
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".welcomePage"
+            android:name=".WelcomePage"
             android:exported="true"/>
         <activity
             android:name=".MainActivity"

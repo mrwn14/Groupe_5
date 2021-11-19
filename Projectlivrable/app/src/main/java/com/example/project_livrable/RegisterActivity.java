@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("Client");
             reference2 = rootNode.getReference("Employé(e)");
-            helperClass help = new helperClass(firstName,lastName,username,email,password,role);
+            HelperClass help = new HelperClass(firstName,lastName,username,email,password,role);
             MainActivity hamid = new MainActivity();
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "hamid <3";
-    helperClass loginMf = new helperClass();
+    HelperClass loginMf = new HelperClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(checkIfUserExists(username,password,snapshot)){
                         if (loginMf.getRole().equals("admin")) {
-                            Intent registeredIntent2 = new Intent(getApplicationContext(), welcomePage.class);
+                            Intent registeredIntent2 = new Intent(getApplicationContext(), WelcomePage.class);
                             registeredIntent2.putExtra("firstName",loginMf.getFirstName());
                             registeredIntent2.putExtra("role",loginMf.getRole());
                             startActivity(registeredIntent2);
                         }
-                        Intent registeredIntent = new Intent(getApplicationContext(), welcomePage.class);
+                        Intent registeredIntent = new Intent(getApplicationContext(), WelcomePage.class);
                         registeredIntent.putExtra("firstName",loginMf.getFirstName());
                         registeredIntent.putExtra("role",loginMf.getRole());
                         startActivity(registeredIntent);
@@ -85,23 +85,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public boolean checkIfUserExists(String username, String password, DataSnapshot dataSnapshot){
-        helperClass user = new helperClass();
+        HelperClass user = new HelperClass();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
-            user.setUsername(ds.getValue(helperClass.class).getUsername());
-            user.setPassword(ds.getValue(helperClass.class).getPassword());
+            user.setUsername(ds.getValue(HelperClass.class).getUsername());
+            user.setPassword(ds.getValue(HelperClass.class).getPassword());
             if(user.getUsername().equals(username) && user.getPassword().equals(password)){
                 Log.d(TAG,"reached here");
-                loginMf.setFirstName(ds.getValue(helperClass.class).getFirstName());
-                loginMf.setRole(ds.getValue(helperClass.class).getRole());
+                loginMf.setFirstName(ds.getValue(HelperClass.class).getFirstName());
+                loginMf.setRole(ds.getValue(HelperClass.class).getRole());
                 return true;
             }
         }
         return false;
     }
     public boolean checkIfUsername(String username, DataSnapshot dataSnapshot){
-        helperClass user = new helperClass();
+        HelperClass user = new HelperClass();
         for(DataSnapshot ds : dataSnapshot.getChildren()){
-            user.setUsername(ds.getValue(helperClass.class).getUsername());
+            user.setUsername(ds.getValue(HelperClass.class).getUsername());
             if(user.getUsername().equals(username)){
                 return true;
             }

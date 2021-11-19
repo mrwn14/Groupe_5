@@ -1,10 +1,10 @@
 package com.example.project_livrable;
 
-public class helperClass {
+public class HelperClass {
 
     String firstName, lastName, username, email, password, role;
 
-    public helperClass(String firstName, String lastName, String username, String email, String password, String role) {
+    public HelperClass(String firstName, String lastName, String username, String email, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -13,10 +13,10 @@ public class helperClass {
         this.role = role;
     }
 
-    public helperClass() {
+    public HelperClass() {
     }
 
-    public helperClass(String username, String password) {
+    public HelperClass(String username, String password) {
         this.username = username;
         this.password = password;
     }
