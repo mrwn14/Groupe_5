@@ -63,15 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(checkIfUserExists(username,password,snapshot)){
                         if (loginMf.getRole().equals("admin")) {
-                            Intent registeredIntent2 = new Intent(getApplicationContext(), WelcomePage.class);
+                            Intent registeredIntent2 = new Intent(getApplicationContext(), AdminInterface.class);
                             registeredIntent2.putExtra("firstName",loginMf.getFirstName());
                             registeredIntent2.putExtra("role",loginMf.getRole());
                             startActivity(registeredIntent2);
                         }
-                        Intent registeredIntent = new Intent(getApplicationContext(), WelcomePage.class);
-                        registeredIntent.putExtra("firstName",loginMf.getFirstName());
-                        registeredIntent.putExtra("role",loginMf.getRole());
-                        startActivity(registeredIntent);
+                        else{
+                            Intent registeredIntent = new Intent(getApplicationContext(), WelcomePage.class);
+                            registeredIntent.putExtra("firstName",loginMf.getFirstName());
+                            registeredIntent.putExtra("role",loginMf.getRole());
+                            startActivity(registeredIntent);
+                        }
+
                     }
                 }
 
