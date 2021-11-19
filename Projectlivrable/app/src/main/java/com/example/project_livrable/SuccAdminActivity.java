@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ThemedSpinnerAdapter;
 
+import android.content.DialogInterface;
 import android.media.MediaCodec;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -75,7 +76,6 @@ public class SuccAdminActivity extends AppCompatActivity {
         myList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                HelperClass employee = helisss.get(position);
                 showDialog();
                 return false;
             }
@@ -88,13 +88,15 @@ public class SuccAdminActivity extends AppCompatActivity {
 
 
     public void showDialog() {
-        AlertDialog.Builder dialogue = new AlertDialog.Builder(getApplicationContext());
-        LayoutInflater layoutInflate= getLayoutInflater();
-        View dialogueView = layoutInflate.inflate(R.layout.activity_succ_list, null);
-        dialogue.setView(dialogueView);
-        dialogue.setTitle("Supprimer une succursale");
-        AlertDialog alertDialog = dialogue.create();
-        alertDialog.show();
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(SuccAdminActivity.this);
+        //LayoutInflater layoutInflate= getLayoutInflater();
+        //View dialogueView = layoutInflate.inflate(R.layout.activity_succ_list, null);
+        //dialogue.setView(dialogueView);
+        dialogue.setMessage("Do you want to delete?")
+                .setPositiveButton("yes", null)
+                .setNegativeButton("No", null);
+        AlertDialog alert = dialogue.create();
+        alert.show();
     }
 
 
