@@ -7,6 +7,7 @@ import java.util.regex.*;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -30,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    DatabaseReference reference2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !email.equals("") && !password.equals("") && !role.equals("")) {
             fromRegistered = true;
             rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference();
-
+            reference = rootNode.getReference("Client");
+            reference2 = rootNode.getReference("Employé(e)");
             helperClass help = new helperClass(firstName,lastName,username,email,password,role);
             MainActivity hamid = new MainActivity();
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,9 +79,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         registeredIntent.putExtra("email", email);
                         registeredIntent.putExtra("password", password);
                         registeredIntent.putExtra("fromRegistered", fromRegistered);
-                        Log.d(TAG,"THE VALUE OF EXISTANT BEFORE CHEKCING IS " + existant);
-                        Log.d(TAG,"IM HERE INSIDE HAHAHHAHAHAHHAH");
-                        reference.child(username).setValue(help);
+                        if (role.equals("Employé(e)")) {
+                            reference2.child(username).setValue(help);
+                        }
+                        if (role.equals("Client")) {
+                            reference.child(username).setValue(help);
+                        }
                         startActivity(registeredIntent);
 
                     }

@@ -16,6 +16,11 @@ public class helperClass {
     public helperClass() {
     }
 
+    public helperClass(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -51,23 +51,37 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordView.getText().toString();
 
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(checkIfUserExists(username,password,snapshot)){
-                    Intent registeredIntent = new Intent(getApplicationContext(), welcomePage.class);
-                    registeredIntent.putExtra("firstName",loginMf.getFirstName());
-                    registeredIntent.putExtra("role",loginMf.getRole());
-                    startActivity(registeredIntent);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Client");
+        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference().child("Employé(e)");
+        DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference().child("admin");
+
+        DatabaseReference[] references = {databaseReference,databaseReference2,databaseReference3};
+
+        for (DatabaseReference ref : references) {
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(checkIfUserExists(username,password,snapshot)){
+                        if (loginMf.getRole().equals("admin")) {
+                            Intent registeredIntent2 = new Intent(getApplicationContext(), welcomePage.class);
+                            registeredIntent2.putExtra("firstName",loginMf.getFirstName());
+                            registeredIntent2.putExtra("role",loginMf.getRole());
+                            startActivity(registeredIntent2);
+                        }
+                        Intent registeredIntent = new Intent(getApplicationContext(), welcomePage.class);
+                        registeredIntent.putExtra("firstName",loginMf.getFirstName());
+                        registeredIntent.putExtra("role",loginMf.getRole());
+                        startActivity(registeredIntent);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+
 
     }
     public boolean checkIfUserExists(String username, String password, DataSnapshot dataSnapshot){
