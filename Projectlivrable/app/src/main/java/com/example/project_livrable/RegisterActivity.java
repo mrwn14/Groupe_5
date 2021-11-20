@@ -2,6 +2,9 @@ package com.example.project_livrable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.regex.*;
 
 
@@ -82,8 +85,25 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         registeredIntent.putExtra("fromRegistered", fromRegistered);
                         if (role.equals("Employé(e)")) {
                             reference2.child(username).setValue(help);
-                            HelperService help2 = new HelperService("a",username,help,"a");
-                            rootNode.getReference("Services").child(username+"_services").setValue(help2);
+
+                            HashMap hamid = new HashMap();
+                            hamid.put("prenom",firstName);
+                            hamid.put("nom",lastName);
+                            hamid.put("ddn","00/00/0000");
+                            hamid.put("adresse","Ottawa");
+
+                            HashMap hamid2 = new HashMap();
+                            hamid2.put("Pdd","lvhkb");
+
+                            Hashtable<String,HelperService> hamid4 = new Hashtable<String,HelperService>();
+                            HelperService help2 = new HelperService("Permis",username,hamid,hamid2);
+                            HelperService help3 = new HelperService("CarteSante",username,hamid,hamid2);
+                            HelperService help4 = new HelperService("identite",username,hamid,hamid2);
+                            hamid4.put("Permis", help2);
+                            hamid4.put("CarteSante", help3);
+                            hamid4.put("identite", help4);
+
+                            rootNode.getReference("Services").child(username+"_services").setValue(hamid4);
                         }
                         if (role.equals("Client")) {
                             reference.child(username).setValue(help);

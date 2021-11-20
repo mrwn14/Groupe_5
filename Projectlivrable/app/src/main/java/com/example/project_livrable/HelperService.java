@@ -1,11 +1,14 @@
 package com.example.project_livrable;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+
 public class HelperService {
-    String serviceName, employeeUsername, document;
-    HelperClass formulaire;
+    String serviceName, employeeUsername;
+    HashMap formulaire, document;
     public HelperService(){
     }
-    public HelperService(String serviceName, String employeeUsername, HelperClass formulaire, String document) {
+    public HelperService(String serviceName, String employeeUsername, HashMap formulaire, HashMap document) {
         this.serviceName = serviceName;
         this.employeeUsername = employeeUsername;
         this.formulaire = formulaire;
@@ -28,19 +31,19 @@ public class HelperService {
         this.employeeUsername = employeeUsername;
     }
 
-    public HelperClass getFormulaire() {
+    public HashMap getFormulaire() {
         return formulaire;
     }
 
-    public void setFormulaire(HelperClass formulaire) {
+    public void setFormulaire(HashMap formulaire) {
         this.formulaire = formulaire;
     }
 
-    public String getDocument() {
+    public HashMap getDocument() {
         return document;
     }
 
-    public void setDocument(String document) {
+    public void setDocument(HashMap document) {
         this.document = document;
     }
 }
