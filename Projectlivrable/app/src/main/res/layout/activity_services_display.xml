@@ -31,13 +31,29 @@
 
         <LinearLayout
             android:layout_width="416dp"
-            android:layout_height="670dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/servicesList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="400dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/ServiceAdderButton"
+                android:layout_width="248dp"
+                android:layout_height="wrap_content"
+                android:onClick="AddOnClick"
+                android:text="Add Service" />
         </LinearLayout>
 
     </LinearLayout>

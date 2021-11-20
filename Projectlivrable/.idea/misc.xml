@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_service_editor.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_services_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_succ_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_succ_list.xml" value="0.1" />

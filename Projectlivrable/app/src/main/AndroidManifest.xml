@@ -16,7 +16,7 @@
             android:name=".EmployeeAdminActivity"
             android:exported="true" />
         <activity
-            android:name=".SuccList"
+            android:name=".ServiceEditor"
             android:exported="true" />
         <activity
             android:name=".SuccAdminActivity"
