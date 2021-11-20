@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projectlivrable">
         <activity
+            android:name=".ServicesDisplay"
+            android:exported="true" />
+        <activity
             android:name=".EmployeeAdminActivity"
             android:exported="true" />
         <activity

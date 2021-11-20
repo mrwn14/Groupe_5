@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ThemedSpinnerAdapter;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.MediaCodec;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ public class SuccAdminActivity extends AppCompatActivity {
 
     LinearLayout myContainer;
     DatabaseReference myref;
+    DatabaseReference myref2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class SuccAdminActivity extends AppCompatActivity {
         myList.setAdapter(myArrayAdapter);
 
         myref = FirebaseDatabase.getInstance().getReference().child("Employé(e)");
+        myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
         myref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -81,7 +85,17 @@ public class SuccAdminActivity extends AppCompatActivity {
                 return false;
             }
         });
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent hamid = new Intent(getApplicationContext(),ServicesDisplay.class);
+                hamid.putExtra("username", lissss.get(position));
+                //hamid.putExtra("firstName", helisss.get(position).getFirstName());
+                startActivity(hamid);
+            }
+        });
     }
+
 
     //I slept at 7am so dont wake me up, I sent the vid i used on discord
     //Hope your understand shdrt
@@ -107,7 +121,10 @@ public class SuccAdminActivity extends AppCompatActivity {
 
     public void deleteSucc(String username) {
         DatabaseReference toDelete = myref.child(username);
+        DatabaseReference toDelete2 = myref2.child(username+"_services");
+
         toDelete.removeValue();
+        toDelete2.removeValue();
         finish();
         startActivity(getIntent());
     }

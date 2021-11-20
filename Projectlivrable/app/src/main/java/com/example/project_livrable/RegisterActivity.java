@@ -65,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !email.equals("") && !password.equals("") && !role.equals("")) {
             fromRegistered = true;
             rootNode = FirebaseDatabase.getInstance();
+
             reference = rootNode.getReference("Client");
             reference2 = rootNode.getReference("Employé(e)");
             HelperClass help = new HelperClass(firstName,lastName,username,email,password,role);
@@ -81,10 +82,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         registeredIntent.putExtra("fromRegistered", fromRegistered);
                         if (role.equals("Employé(e)")) {
                             reference2.child(username).setValue(help);
+                            HelperService help2 = new HelperService("a",username,help,"a");
+                            rootNode.getReference("Services").child(username+"_services").setValue(help2);
                         }
                         if (role.equals("Client")) {
                             reference.child(username).setValue(help);
                         }
+
                         startActivity(registeredIntent);
 
                     }
