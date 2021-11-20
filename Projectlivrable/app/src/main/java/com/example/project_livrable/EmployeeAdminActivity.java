@@ -31,6 +31,8 @@ public class EmployeeAdminActivity extends AppCompatActivity {
 
     LinearLayout myContainer;
     DatabaseReference myref;
+    DatabaseReference myref2;
+    Bundle reg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,11 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         ArrayList<String> lissss = new ArrayList<String>();
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss);
         myList.setAdapter(myArrayAdapter);
-        Bundle reg = getIntent().getExtras();
+        reg = getIntent().getExtras();
 
         myref = FirebaseDatabase.getInstance().getReference().child(reg.getString("role"));
+        myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
+
         myref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -79,7 +83,7 @@ public class EmployeeAdminActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 String us = lissss.get(position);
                 showDialog(us);
-                return false;
+                return true;
             }
         });
     }
@@ -107,10 +111,21 @@ public class EmployeeAdminActivity extends AppCompatActivity {
     }
 
     public void deleteSucc(String username) {
-        DatabaseReference toDelete = myref.child(username);
-        toDelete.removeValue();
-        finish();
-        startActivity(getIntent());
+        if(reg.getString("role").equals("Employé(e)")){
+            DatabaseReference toDelete = myref.child(username);
+            DatabaseReference toDelete2 = myref2.child(username+"_services");
+
+            toDelete.removeValue();
+            toDelete2.removeValue();
+            finish();
+            startActivity(getIntent());
+        }
+        else {
+            DatabaseReference toDelete = myref.child(username);
+            toDelete.removeValue();
+            finish();
+            startActivity(getIntent());
+        }
     }
 }
 

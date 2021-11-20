@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -169,6 +170,87 @@ public class ServiceEditor extends AppCompatActivity {
                 return true;
             }
         });
+        formlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ServiceEditor.this);
+                builder.setTitle("Changer le nom du champ: ");
+                final EditText input = new EditText(ServiceEditor.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String service= input.getText().toString();
+                        if(!service.equals("")) {
+                            ref.child(service).setValue("empty");
+                            DatabaseReference hamid = ref.child(formNames.get(position));
+                            hamid.removeValue();
+                            formNames.remove(position);
+                            formNames.add(service);
+                        }
+                        else{
+                            AlertDialog.Builder build = new AlertDialog.Builder(ServiceEditor.this);
+                            build.setMessage("Can't change, empty input.");
+                            AlertDialog alert = build.create();
+                            alert.show();
+                        }
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
+
+
+            }
+        });
+        doclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ServiceEditor.this);
+                builder.setTitle("Changer le nom du champ: ");
+                final EditText input = new EditText(ServiceEditor.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String service= input.getText().toString();
+                        if(!service.equals("")) {
+                            ref2.child(service).setValue("empty");
+                            DatabaseReference hamid = ref2.child(docNames.get(position));
+                            hamid.removeValue();
+                            docNames.remove(position);
+                            docNames.add(service);
+                        }
+                        else{
+                            AlertDialog.Builder build = new AlertDialog.Builder(ServiceEditor.this);
+                            build.setMessage("Can't change, empty input.");
+                            AlertDialog alert = build.create();
+                            alert.show();
+                        }
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+
+
+
+            }
+        });
 
         doclist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -258,7 +340,6 @@ public class ServiceEditor extends AppCompatActivity {
         startActivity(getIntent());
     }
     public void doneButton(View view){
-        Intent hamid = new Intent(getApplicationContext(),ServicesDisplay.class);
-        startActivity(hamid);
+        finish();
     }
 }

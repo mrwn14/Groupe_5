@@ -42,7 +42,8 @@ public class SuccAdminActivity extends AppCompatActivity {
         ListView myList = (ListView)findViewById(R.id.SuccListView);
         ArrayList<HelperClass> helisss = new ArrayList<HelperClass>();
         ArrayList<String> lissss = new ArrayList<String>();
-        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss);
+        ArrayList<String> lissss2 = new ArrayList<String>();
+        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss2);
         myList.setAdapter(myArrayAdapter);
 
         myref = FirebaseDatabase.getInstance().getReference().child("Employé(e)");
@@ -52,6 +53,7 @@ public class SuccAdminActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 HelperClass value = snapshot.getValue(HelperClass.class);
                 lissss.add(value.getUsername());
+                lissss2.add("Succursale de " + value.getUsername());
                 helisss.add(value);
                 myArrayAdapter.notifyDataSetChanged();
             }
@@ -81,6 +83,7 @@ public class SuccAdminActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 String us = lissss.get(position);
+                lissss2.remove(position);
                 showDialog(us);
                 return true;
             }
