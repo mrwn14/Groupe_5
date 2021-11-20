@@ -108,6 +108,8 @@ public class SuccAdminActivity extends AppCompatActivity {
     public void deleteSucc(String username) {
         DatabaseReference toDelete = myref.child(username);
         toDelete.removeValue();
+        finish();
+        startActivity(getIntent());
     }
 }
 
