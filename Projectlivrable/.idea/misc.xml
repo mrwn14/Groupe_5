@@ -7,10 +7,12 @@
         <entry key="..\:/Users/Marouane/Desktop/SEG2505/Groupe_5/Projectlivrable/app/src/main/res/layout/activity_succ_admin.xml" value="0.25" />
         <entry key="..\:/Users/Marouane/Desktop/SEG2505/Groupe_5/Projectlivrable/app/src/main/res/layout/activity_succ_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_admin_interface.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_employee_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_succ_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_succ_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_welcome_page.xml" value="0.335" />
       </map>
     </option>

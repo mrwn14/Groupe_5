@@ -69,12 +69,14 @@
                 android:layout_width="267dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:onClick="ClientButtonOnClick"
                 android:text="Client" />
 
             <Button
                 android:id="@+id/EmployeeButton"
                 android:layout_width="268dp"
                 android:layout_height="wrap_content"
+                android:onClick="EmployeeButtonOnClick"
                 android:text="Employé(e)" />
         </LinearLayout>
     </LinearLayout>
