@@ -76,7 +76,8 @@ public class SuccAdminActivity extends AppCompatActivity {
         myList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showDialog();
+                String us = lissss.get(position);
+                showDialog(us);
                 return false;
             }
         });
@@ -87,18 +88,26 @@ public class SuccAdminActivity extends AppCompatActivity {
 
 
 
-    public void showDialog() {
+    public void showDialog(String username) {
         AlertDialog.Builder dialogue = new AlertDialog.Builder(SuccAdminActivity.this);
         //LayoutInflater layoutInflate= getLayoutInflater();
         //View dialogueView = layoutInflate.inflate(R.layout.activity_succ_list, null);
         //dialogue.setView(dialogueView);
         dialogue.setMessage("Do you want to delete?")
-                .setPositiveButton("yes", null)
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteSucc(username);
+                    }
+                })
                 .setNegativeButton("No", null);
         AlertDialog alert = dialogue.create();
         alert.show();
     }
 
-
+    public void deleteSucc(String username) {
+        DatabaseReference toDelete = myref.child(username);
+        toDelete.removeValue();
+    }
 }
 
