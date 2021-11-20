@@ -82,7 +82,7 @@ public class SuccAdminActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 String us = lissss.get(position);
                 showDialog(us);
-                return false;
+                return true;
             }
         });
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

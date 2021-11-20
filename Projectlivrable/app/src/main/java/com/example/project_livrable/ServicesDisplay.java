@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -33,6 +34,8 @@ public class ServicesDisplay extends AppCompatActivity {
     final String TAG = "hamid <3";
     String username;
     String serviceName;
+    DatabaseReference referr;
+    int compteur;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,7 +50,7 @@ public class ServicesDisplay extends AppCompatActivity {
         servicestext.setText("Services de la succursale " + username);
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, serviceNames);
         myList.setAdapter(myArrayAdapter);
-        DatabaseReference referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
+        referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
         referr.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -56,13 +59,8 @@ public class ServicesDisplay extends AppCompatActivity {
                 serviceName = snapshot.child("serviceName").getValue(String.class);
                 HashMap document = (HashMap) snapshot.child("document").getValue();
                 HashMap formulaire = (HashMap) snapshot.child("formulaire").getValue();
-//                int n = 0;
-//                while (n < 100000) {
-//                    Log.d(TAG, "AAAAAAAAAAAAAAHGSJSJDAASASAA " + employeeUsername + " " + serviceName + " " + document.get("Pdd")+ " "+formulaire.get("adresse") );
-//                    n += 1;
-//                }
-
                 serviceNames.add(serviceName);
+                compteur += 1;
                 services.add(new HelperService(serviceName, employeeUsername, formulaire, document));
                 myArrayAdapter.notifyDataSetChanged();
 
@@ -95,16 +93,32 @@ public class ServicesDisplay extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent hamid = new Intent(getApplicationContext(),ServiceEditor.class);
                 hamid.putExtra("username", username);
-                //hamid.putExtra("firstName", helisss.get(position).getFirstName());
                 hamid.putExtra("serviceName", serviceNames.get(position));
+                hamid.putExtra("service", serviceNames.get(position));
+
                 startActivity(hamid);
             }
         });
+
+        myList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (compteur > 3) {
+                    String delet = serviceNames.get(position);
+                    showDialog(delet);
+                    compteur -= 1;
+                } else {
+                    AlertDialog.Builder build = new AlertDialog.Builder(ServicesDisplay.this);
+                    build.setMessage("Can't delete, you need at least 3 services.");
+                    AlertDialog alert = build.create();
+                    alert.show();
+                }
+                return true;
+            }
+        });
+
     }
     public void AddOnClick(View view){
-        Intent hamid = new Intent(getApplicationContext(),ServiceEditor.class);
-        hamid.putExtra("username", username);
-        hamid.putExtra("serviceName", "");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Nom du service: ");
 
@@ -120,10 +134,22 @@ public class ServicesDisplay extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String service= input.getText().toString();
+//                if(!service.equals("")){
                 Intent hamid = new Intent(getApplicationContext(),ServiceEditor.class);
                 hamid.putExtra("service", service);
+                hamid.putExtra("username", username);
+                hamid.putExtra("serviceName", "");
+                Log.d(TAG, "THE USERNAME USERNAME USERNAME USERNAME USERNAME is the following: " + username);
                 addService(service);
                 startActivity(hamid);
+//                }
+//                else{
+//                    AlertDialog.Builder bbb = new AlertDialog.Builder(ServicesDisplay.this);
+//                    bbb.setMessage("Can't create empty service");
+//                    AlertDialog alert = bbb.create();
+//                    alert.show();
+//                }
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -140,13 +166,13 @@ public class ServicesDisplay extends AppCompatActivity {
     public void addService(String service) {
         DatabaseReference rafa = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
         HashMap hamid = new HashMap();
-        hamid.put("prenom", "empty");
-        hamid.put("nom", "empty");
-        hamid.put("ddn","empty");
-        hamid.put("adresse","empty");
+        hamid.put("Prenom","empty");
+        hamid.put("Nom","empty");
+        hamid.put("Date de naissance","empty");
+        hamid.put("Adresse","empty");
 
         HashMap hamid2 =  new HashMap();
-        hamid2.put("Pdd","empty");
+        hamid2.put("Preuve de domicile","empty");
 
         HashMap hamid4 = new HashMap();
 
@@ -154,5 +180,28 @@ public class ServicesDisplay extends AppCompatActivity {
         HelperService ser = new HelperService(service, username, hamid, hamid2);
         hamid4.put(service, ser);
         rafa.child(service).setValue(ser);
+    }
+
+    public void showDialog(String service) {
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServicesDisplay.this);
+        dialogue.setMessage("Do you want to delete?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteService(service);
+                    }
+                })
+                .setNegativeButton("No", null);
+        AlertDialog alert = dialogue.create();
+        alert.show();
+    }
+
+    public void deleteService(String service) {
+        DatabaseReference toDelete = referr.child(service);
+
+        toDelete.removeValue();
+        finish();
+        startActivity(getIntent());
+
     }
 }

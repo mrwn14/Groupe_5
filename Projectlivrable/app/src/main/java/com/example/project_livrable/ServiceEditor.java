@@ -2,11 +2,15 @@ package com.example.project_livrable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,9 +31,11 @@ public class ServiceEditor extends AppCompatActivity {
     ArrayList<String> formNames;
     ArrayList<String> docNames;
     DatabaseReference ref;
+    DatabaseReference ref2;
     String serviceName;
     String service;
     String username;
+    String TAG = "TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,41 +45,58 @@ public class ServiceEditor extends AppCompatActivity {
         username = reg.getString("username");
         serviceName = reg.getString("serviceName");
         service = reg.getString("service");
-        ListView formlist = (ListView) findViewById(R.id.formList);
-        ListView doclist = (ListView) findViewById(R.id.docList);
         formNames = new ArrayList<String>();
         docNames = new ArrayList<String>();
+        for (String elem:formNames) {
+            Log.d(TAG, "FOOOOOOORM ELEMENTS ARE: " + elem);
+        }
+        for (String elem:docNames) {
+            Log.d(TAG, "DOOOOOOOOOCS ELEMENTS ARE: " + elem);
+        }
+        Log.d("TAG", "THE RECEIVED USERNAME IS THE FOLLOWING : "+ username);
+        ListView formlist = (ListView) findViewById(R.id.formList);
+        ListView doclist = (ListView) findViewById(R.id.docList);
+
         editForm = (EditText) findViewById(R.id.editFormulaire);
         editDocs = (EditText) findViewById(R.id.editDocuments);
+
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, formNames);
         ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, docNames);
 
         formlist.setAdapter(myAdapter);
         doclist.setAdapter(myAdapter2);
-        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("formulaire");
             ref.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    try {
-                        HashMap document = (HashMap) snapshot.child("document").getValue();
-                        Object[] hamid = document.keySet().toArray();
+                    String documentIterable = snapshot.getValue(String.class);
+                    String hamid = snapshot.getKey();
+                    formNames.add(hamid);
+//                    Log.d(TAG, "started");
+//                    while(documentIterable.iterator().hasNext()) {
+//                        Log.d(TAG, "onChildAdded: " + documentIterable.iterator().next());
+//                    }
+//                    Log.d(TAG, "finished");
 
-                        for (Object k : hamid) {
-                            docNames.add(String.valueOf(k));
-                        }
-                        HashMap formulaire = (HashMap) snapshot.child("formulaire").getValue();
-                        Object[] hamid2 = formulaire.keySet().toArray();
+//                    Object[] hamid = document.keySet().toArray();
 
-                        for (Object k : hamid2) {
-                            formNames.add(String.valueOf(k));
-                        }
+//                        for (Object k : hamid) {
+//                            docNames.add(String.valueOf(k));
+//                            Log.d(TAG, "THE STRING DOCUMENT VALUES ARE THE FOLLOWING : "+ k);
+//                        }
+//                        HashMap formulaire = (HashMap) snapshot.child("formulaire").getValue();
+//                        Object[] hamid2 = formulaire.keySet().toArray();
+//
+//                        for (Object k : hamid2) {
+//                            formNames.add(String.valueOf(k));
+//                            Log.d(TAG, "THE STRING FORM VALUES ARE THE FOLLOWING : "+ k);
+//
+//                        }
+
                         myAdapter.notifyDataSetChanged();
-                        myAdapter2.notifyDataSetChanged();
-                    }
-                    catch (Exception e){
 
-                    }
+
 
 //                    if (!formNames.contains("prenom")) formNames.add("prenom");
 //                    if (!formNames.contains("nom")) formNames.add("nom");
@@ -107,7 +130,56 @@ public class ServiceEditor extends AppCompatActivity {
                 }
             });
 
+        ref2 = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("document");
+        ref2.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String documentIterable2 = snapshot.getValue(String.class);
+                String hamid = snapshot.getKey();
+                docNames.add(hamid);
+                myAdapter2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                myAdapter2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        formlist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String delet = formNames.get(position);
+                showDialogForm(delet);
+                return true;
+            }
+        });
+
+        doclist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String delet = docNames.get(position);
+                showDialogDoc(delet);
+                return true;
+            }
+        });
     }
+
     public void FormulaireAdd(View view) {
         String champ = editForm.getText().toString();
         ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
@@ -124,5 +196,69 @@ public class ServiceEditor extends AppCompatActivity {
         else{
             Log.d("hamid", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
+    }
+    public void DocumentsAdd(View view) {
+        String champ = editDocs.getText().toString();
+        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        if(!champ.equals("") && !docNames.contains(champ)){
+            docNames.add(champ);
+            ref.child("document").child(champ).setValue("empty");
+            getIntent().putExtra("service", service);
+            getIntent().putExtra("serviceName", serviceName);
+            getIntent().putExtra("username", username);
+
+            finish();
+            startActivity(getIntent());
+        }
+        else{
+            Log.d("hamid", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        }
+    }
+
+    public void showDialogForm(String champ) {
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServiceEditor.this);
+        dialogue.setMessage("Do you want to delete?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteChampForm(champ);
+                    }
+                })
+                .setNegativeButton("No", null);
+        AlertDialog alert = dialogue.create();
+        alert.show();
+    }
+    public void showDialogDoc(String champ) {
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServiceEditor.this);
+        dialogue.setMessage("Do you want to delete?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteChampDoc(champ);
+                    }
+                })
+                .setNegativeButton("No", null);
+        AlertDialog alert = dialogue.create();
+        alert.show();
+    }
+
+    public void deleteChampForm(String champ) {
+        DatabaseReference toDelete = ref.child(champ);
+
+        toDelete.removeValue();
+        finish();
+        startActivity(getIntent());
+
+    }
+    public void deleteChampDoc(String champ) {
+        DatabaseReference toDelete = ref2.child(champ);
+
+        toDelete.removeValue();
+        finish();
+        startActivity(getIntent());
+    }
+    public void doneButton(View view){
+        Intent hamid = new Intent(getApplicationContext(),ServicesDisplay.class);
+        startActivity(hamid);
     }
 }

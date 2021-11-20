@@ -87,21 +87,21 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             reference2.child(username).setValue(help);
 
                             HashMap hamid = new HashMap();
-                            hamid.put("prenom",firstName);
-                            hamid.put("nom",lastName);
-                            hamid.put("ddn","00/00/0000");
-                            hamid.put("adresse","Ottawa");
+                            hamid.put("Prenom","empty");
+                            hamid.put("Nom","empty");
+                            hamid.put("Date de naissance","empty");
+                            hamid.put("Adresse","empty");
 
                             HashMap hamid2 = new HashMap();
-                            hamid2.put("Pdd","lvhkb");
+                            hamid2.put("Preuve de domicile","empty");
 
                             Hashtable<String,HelperService> hamid4 = new Hashtable<String,HelperService>();
                             HelperService help2 = new HelperService("Permis",username,hamid,hamid2);
                             HelperService help3 = new HelperService("CarteSante",username,hamid,hamid2);
-                            HelperService help4 = new HelperService("identite",username,hamid,hamid2);
+                            HelperService help4 = new HelperService("Identite",username,hamid,hamid2);
                             hamid4.put("Permis", help2);
                             hamid4.put("CarteSante", help3);
-                            hamid4.put("identite", help4);
+                            hamid4.put("Identite", help4);
 
                             rootNode.getReference("Services").child(username+"_services").setValue(hamid4);
                         }

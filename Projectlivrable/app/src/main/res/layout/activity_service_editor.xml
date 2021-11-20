@@ -118,6 +118,7 @@
                         android:id="@+id/DocumentsAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="DocumentsAdd"
                         android:text="Add" />
                 </LinearLayout>
             </LinearLayout>
@@ -134,6 +135,7 @@
                 android:id="@+id/DoneButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="doneButton"
                 android:text="Done" />
         </LinearLayout>
 
