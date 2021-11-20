@@ -120,6 +120,7 @@ public class ServicesDisplay extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String service= input.getText().toString();
+                Intent hamid = new Intent(getApplicationContext(),ServiceEditor.class);
                 hamid.putExtra("service", service);
                 addService(service);
                 startActivity(hamid);
