@@ -34,6 +34,8 @@ public class ServicesDisplay extends AppCompatActivity {
         ArrayList<String> serviceNames = new ArrayList<String>();
         ArrayList<HelperService> services = new ArrayList<HelperService>();
         ListView myList = (ListView)findViewById(R.id.servicesList);
+        TextView servicestext = (TextView) findViewById(R.id.servicesText);
+        servicestext.setText("Services de la succursale " + username);
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, serviceNames);
         myList.setAdapter(myArrayAdapter);
         DatabaseReference referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
