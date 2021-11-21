@@ -10,6 +10,7 @@ import java.util.regex.*;
 
 
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -77,6 +78,24 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!isValidEmailAddress(email)) {
+                        showInvalidDialog("Email", "l'email doit être valide.");
+                    }
+                    if (!isPasswordValid(password)) {
+                        showInvalidDialog("Mot de passe", "le mot de passe doit comporter plus de 5 caractères");
+                    }
+                    if (!isNameValid(firstName)) {
+                        showInvalidDialog("Prénom", "le nom ne doit comporter que des lettres");
+                    }
+                    if (!isNameValid(lastName)) {
+                        showInvalidDialog("Nom", "le nom ne doit comporter que des lettres");
+                    }
+                    if (!isUsernameValid(username)) {
+                        showInvalidDialog("Username", "le nom d'utilisateur doit comprendre uniquement des lettres et des chiffres, et doit comporter plus de 3 caractères.");
+                    }
+                    if (hamid.checkIfUsername(username,snapshot)) {
+                        showInvalidDialog("Username ou mot de passe", "le compte n'existe pas");
+                    }
                     if(!hamid.checkIfUsername(username,snapshot) && isValidEmailAddress(email) && isUsernameValid(username) && isNameValid(firstName)&& isNameValid(lastName) && isPasswordValid(password)) {
                         registeredIntent.putExtra("firstName", firstName);
                         registeredIntent.putExtra("lastName", lastName);
@@ -157,5 +176,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
     public static boolean isPasswordValid(String password){
         return password.length()>5;
+    }
+
+    public void showInvalidDialog(String champ, String adv) {
+        AlertDialog.Builder bb = new AlertDialog.Builder(RegisterActivity.this);
+        bb.setMessage(champ + " Invalide, " + adv);
+        AlertDialog alert = bb.create();
+        alert.show();
     }
 }
