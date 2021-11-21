@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -44,8 +43,6 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss);
         myList.setAdapter(myArrayAdapter);
         reg = getIntent().getExtras();
-        TextView txt = (TextView) findViewById(R.id.RoleAdmin);
-        txt.setText("Users");
 
         myref = FirebaseDatabase.getInstance().getReference().child(reg.getString("role"));
         myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
@@ -130,4 +127,3 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         }
     }
 }
-
