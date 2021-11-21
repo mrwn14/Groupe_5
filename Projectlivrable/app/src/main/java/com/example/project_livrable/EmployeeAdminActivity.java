@@ -25,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -46,13 +44,8 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss);
         myList.setAdapter(myArrayAdapter);
         reg = getIntent().getExtras();
-        TextView roleAdmin = (TextView) findViewById(R.id.RoleAdmin);
-        if (reg.getString("role").equals("Client")) {
-            roleAdmin.setText("Clients");
-        }
-        else if (reg.getString("role").equals("Employé(é)")) {
-            roleAdmin.setText("Employés");
-        }
+        TextView txt = (TextView) findViewById(R.id.RoleAdmin);
+        txt.setText("Users");
 
         myref = FirebaseDatabase.getInstance().getReference().child(reg.getString("role"));
         myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
