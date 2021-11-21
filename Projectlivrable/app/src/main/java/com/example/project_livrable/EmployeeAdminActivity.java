@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class EmployeeAdminActivity extends AppCompatActivity {
 
-    LinearLayout myContainer;
     DatabaseReference myref;
     DatabaseReference myref2;
     Bundle reg;

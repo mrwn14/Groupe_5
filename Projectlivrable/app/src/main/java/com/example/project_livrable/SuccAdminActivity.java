@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class SuccAdminActivity extends AppCompatActivity {
 
-    LinearLayout myContainer;
     DatabaseReference myref;
     DatabaseReference myref2;
 
