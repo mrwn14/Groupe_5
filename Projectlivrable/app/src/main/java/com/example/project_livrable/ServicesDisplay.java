@@ -103,7 +103,7 @@ public class ServicesDisplay extends AppCompatActivity {
         myList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (compteur > 3) {
+                if (isAddingServicePossible(compteur)) {
                     String delet = serviceNames.get(position);
                     showDialog(delet);
                     compteur -= 1;
@@ -203,5 +203,8 @@ public class ServicesDisplay extends AppCompatActivity {
         finish();
         startActivity(getIntent());
 
+    }
+    public static boolean isAddingServicePossible(int compteur){
+        return (compteur > 3) ? true : false;
     }
 }

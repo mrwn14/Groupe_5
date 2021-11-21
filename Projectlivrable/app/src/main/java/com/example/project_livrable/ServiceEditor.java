@@ -265,7 +265,7 @@ public class ServiceEditor extends AppCompatActivity {
     public void FormulaireAdd(View view) {
         String champ = editForm.getText().toString();
         ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
-        if(!champ.equals("") && !formNames.contains(champ)){
+        if(isDocValid(champ) && !formNames.contains(champ)){
             formNames.add(champ);
             ref.child("formulaire").child(champ).setValue("empty");
             getIntent().putExtra("service", service);
@@ -341,5 +341,8 @@ public class ServiceEditor extends AppCompatActivity {
     }
     public void doneButton(View view){
         finish();
+    }
+    public static boolean isDocValid(String champ){
+        return !champ.equals("");
     }
 }

@@ -44,4 +44,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Unit testing dependencies
+    testImplementation 'junit:junit:4.12'
+    // Set this dependency if you want to use the Hamcrest matcher library
+    testImplementation 'org.hamcrest:hamcrest-library:1.3'
+    // more stuff, e.g., Mockito
+
 }

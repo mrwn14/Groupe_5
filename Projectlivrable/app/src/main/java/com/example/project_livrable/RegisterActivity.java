@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(!hamid.checkIfUsername(username,snapshot) && isValidEmailAddress(email) && isUsernameValid(username) && isNameValid(firstName)&& isNameValid(lastName) && password.length()>=6) {
+                    if(!hamid.checkIfUsername(username,snapshot) && isValidEmailAddress(email) && isUsernameValid(username) && isNameValid(firstName)&& isNameValid(lastName) && isPasswordValid(password)) {
                         registeredIntent.putExtra("firstName", firstName);
                         registeredIntent.putExtra("lastName", lastName);
                         registeredIntent.putExtra("username", username);
@@ -131,78 +131,31 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    public boolean isValidEmailAddress(String emai) {
-        Boolean val = true;
-        String email = emai.replaceAll("\\s+","");
+    public static boolean isValidEmailAddress(String email) {
         if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            val = true;
-        }
-        else if (email.isEmpty()){
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ ne peut pas être vide.");
-            AlertDialog alert = bbb.create();
-            alert.show();
-            return false;
-        }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ invalide, entrez un email correcte.");
-            AlertDialog alert = bbb.create();
-            alert.show();
-            val = false;
-        }
-        return val;
-    }
-    public boolean isUsernameValid(String usernam){
-        Pattern pattern = Pattern.compile("[A-Za-z0-9_]+");
-        Boolean val = true;
-
-        if (usernam == null) {
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ ne peut pas être vide.");
-            AlertDialog alert = bbb.create();
-            alert.show();
-            return false;
-        }
-        String username = usernam.replaceAll("\\s+","");
-        Matcher m = pattern.matcher(username);
-        if (m.matches() && username.length() >=3) {
             return true;
         }
-        else if (!m.matches()){
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ doit seulement contenir des lettres et chiffres.");
-            AlertDialog alert = bbb.create();
-            alert.show();
-            val = false;
-        }
-        else if (username.length() <3){
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ doit avoir 3 caractères ou plus.");
-            AlertDialog alert = bbb.create();
-            alert.show();
-            val = false;
-        }
-        return val;
-    }
-    public boolean isNameValid(String usernam){
-        Pattern pattern = Pattern.compile("[A-Za-z]+");
-
-        if (usernam == null) {
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ ne peut pas être vide.");
-            AlertDialog alert = bbb.create();
-            alert.show();
+        else{
             return false;
         }
-        String username = usernam.replaceAll("\\s+","");
-        if (!pattern.matcher(username).matches()) {
-            AlertDialog.Builder bbb = new AlertDialog.Builder(RegisterActivity.this);
-            bbb.setMessage("Champ doit seulement contenir des lettres.");
-            AlertDialog alert = bbb.create();
-            alert.show();
+    }
+    public static boolean isUsernameValid(String username){
+        Pattern pattern = Pattern.compile("[A-Za-z0-9_]+");
+        if (username == null) {
+            return false;
+        }
+        Matcher m = pattern.matcher(username);
+        return (m.matches() && username.length() >=3);
+    }
+    public static boolean isNameValid(String username){
+        Pattern pattern = Pattern.compile("[A-Za-z]+");
+        if (username == null) {
+            return false;
         }
         Matcher m = pattern.matcher(username);
         return m.matches();
+    }
+    public static boolean isPasswordValid(String password){
+        return password.length()>5;
     }
 }
