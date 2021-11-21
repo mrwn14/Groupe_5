@@ -67,7 +67,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         Spinner roleView = (Spinner) findViewById(R.id.spinner2);
         String role = roleView.getSelectedItem().toString();
         boolean fromRegistered;
-        if (!firstName.equals("") && !lastName.equals("") && !username.equals("") && !email.equals("") && !password.equals("") && !role.equals("")) {
             fromRegistered = true;
             rootNode = FirebaseDatabase.getInstance();
 
@@ -139,7 +138,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             });
 
         }
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -168,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
     public static boolean isNameValid(String username){
         Pattern pattern = Pattern.compile("[A-Za-z]+");
-        if (username == null) {
+        if (username == null || username.equals("")) {
             return false;
         }
         Matcher m = pattern.matcher(username);
