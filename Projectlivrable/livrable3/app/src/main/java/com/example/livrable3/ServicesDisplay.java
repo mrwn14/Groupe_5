@@ -35,13 +35,15 @@ public class ServicesDisplay extends AppCompatActivity {
     String username;
     String serviceName;
     DatabaseReference referr;
+    Bundle reg;
+
     int compteur;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_display);
-        Bundle reg = getIntent().getExtras();
+        reg = getIntent().getExtras();
         username = reg.getString("username");
         ArrayList<String> serviceNames = new ArrayList<String>();
         ArrayList<HelperService> services = new ArrayList<HelperService>();
@@ -50,7 +52,12 @@ public class ServicesDisplay extends AppCompatActivity {
         servicestext.setText("Services de la succursale " + username);
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, serviceNames);
         myList.setAdapter(myArrayAdapter);
-        referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
+        if(reg.getString("case").equals("Succursale")) {
+            referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services");
+        }
+        else{
+            referr = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
+        }
         referr.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -134,22 +141,25 @@ public class ServicesDisplay extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String service= input.getText().toString();
-//                if(!service.equals("")){
-                Intent hamid = new Intent(getApplicationContext(),ServiceEditor.class);
-                hamid.putExtra("service", service);
-                hamid.putExtra("username", username);
-                hamid.putExtra("serviceName", "");
+                reg = getIntent().getExtras();
+                Intent hamid= new Intent(getApplicationContext(),ServiceEditor.class);
+                if(reg.getString("case").equals("Succursale")) {
+                    hamid.putExtra("service", service);
+                    hamid.putExtra("username", username);
+                    hamid.putExtra("serviceName", "");
+                    hamid = new Intent(getApplicationContext(),ServiceEditor.class);
+                }
+                else{
+                    String test = service + ", Employé(e)";
+                    Log.d(TAG,test.split(",")[0] + " the next one is "+ test.split(",")[1]);
+                    hamid.putExtra("service", service);
+                    hamid = new Intent(getApplicationContext(),ServiceEditor2.class);
+                }
+
                 Log.d(TAG, "THE USERNAME USERNAME USERNAME USERNAME USERNAME is the following: " + username);
                 addService(service);
-                startActivity(hamid);
-//                }
-//                else{
-//                    AlertDialog.Builder bbb = new AlertDialog.Builder(ServicesDisplay.this);
-//                    bbb.setMessage("Can't create empty service");
-//                    AlertDialog alert = bbb.create();
-//                    alert.show();
-//                }
 
+                startActivity(hamid);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -164,7 +174,14 @@ public class ServicesDisplay extends AppCompatActivity {
     }
 
     public void addService(String service) {
-        DatabaseReference rafa = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
+        DatabaseReference rafa;
+        reg = getIntent().getExtras();
+        if(reg.getString("case").equals("Succursale")) {
+            rafa = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
+        }
+        else{
+            rafa = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
+        }
         HashMap hamid = new HashMap();
         hamid.put("Prenom","empty");
         hamid.put("Nom","empty");

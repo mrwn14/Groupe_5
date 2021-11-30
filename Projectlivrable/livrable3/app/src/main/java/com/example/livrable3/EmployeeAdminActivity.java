@@ -37,7 +37,7 @@ public class EmployeeAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_succ_admin);
+        setContentView(R.layout.activity_employee_admin);
         ListView myList = (ListView)findViewById(R.id.SuccListView);
         ArrayList<HelperClass> helisss = new ArrayList<HelperClass>();
         ArrayList<String> lissss = new ArrayList<String>();

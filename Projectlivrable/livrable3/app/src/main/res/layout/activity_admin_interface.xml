@@ -49,6 +49,14 @@
                 android:gravity="center"
                 android:onClick="SuccButtonOnClick"
                 android:text="Succursales" />
+
+            <Button
+                android:id="@+id/ServicesGeneralesButton"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="ServiceGeneralOnClick"
+                android:text="Services généraux" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,6 +84,7 @@
                 android:id="@+id/EmployeeButton"
                 android:layout_width="268dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:onClick="EmployeeButtonOnClick"
                 android:text="Employé(e)" />
         </LinearLayout>

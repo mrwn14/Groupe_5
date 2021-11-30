@@ -68,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
                             registeredIntent2.putExtra("role",loginMf.getRole());
                             startActivity(registeredIntent2);
                         }
+                        else if(loginMf.getRole().equals("Employé(e)")){
+                            Intent registeredIntent = new Intent(getApplicationContext(), EmployeeInterface.class);
+                            registeredIntent.putExtra("firstName",loginMf.getFirstName());
+                            registeredIntent.putExtra("role",loginMf.getRole());
+                            registeredIntent.putExtra("username",loginMf.getUsername());
+
+                            startActivity(registeredIntent);
+                        }
                         else{
                             Intent registeredIntent = new Intent(getApplicationContext(), WelcomePage.class);
                             registeredIntent.putExtra("firstName",loginMf.getFirstName());

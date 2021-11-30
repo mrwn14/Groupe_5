@@ -18,6 +18,12 @@ public class AdminInterface extends AppCompatActivity {
         theSucc.putExtra("role","Employé(e)");
         startActivity(theSucc);
     }
+    public void ServiceGeneralOnClick(View view){
+        Intent theSucc = new Intent(getApplicationContext(), ServicesDisplay.class);
+        theSucc.putExtra("role","Employé(e)");
+        theSucc.putExtra("case","General");
+        startActivity(theSucc);
+    }
     public void EmployeeButtonOnClick(View view){
         Intent theSucc = new Intent(getApplicationContext(), EmployeeAdminActivity.class);
         theSucc.putExtra("role","Employé(e)");

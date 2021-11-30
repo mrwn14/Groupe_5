@@ -92,6 +92,7 @@ public class SuccAdminActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent hamid = new Intent(getApplicationContext(),ServicesDisplay.class);
                 hamid.putExtra("username", lissss.get(position));
+                hamid.putExtra("case", "Succursale");
                 //hamid.putExtra("firstName", helisss.get(position).getFirstName());
                 startActivity(hamid);
             }

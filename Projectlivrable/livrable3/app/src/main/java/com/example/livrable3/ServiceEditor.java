@@ -54,7 +54,7 @@ public class ServiceEditor extends AppCompatActivity {
         for (String elem:docNames) {
             Log.d(TAG, "DOOOOOOOOOCS ELEMENTS ARE: " + elem);
         }
-        Log.d("TAG", "THE RECEIVED USERNAME IS THE FOLLOWING : "+ username);
+//        Log.d("TAG", "THE RECEIVED service IS THE FOLLOWING : "+ caseType);
         ListView formlist = (ListView) findViewById(R.id.formList);
         ListView doclist = (ListView) findViewById(R.id.docList);
 
@@ -67,8 +67,9 @@ public class ServiceEditor extends AppCompatActivity {
 
         formlist.setAdapter(myAdapter);
         doclist.setAdapter(myAdapter2);
-        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("formulaire");
-            ref.addChildEventListener(new ChildEventListener() {
+            ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("formulaire");
+
+        ref.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     String documentIterable = snapshot.getValue(String.class);
