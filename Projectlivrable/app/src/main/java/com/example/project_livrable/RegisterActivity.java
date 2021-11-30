@@ -136,10 +136,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
+            MainActivity hamid2 = new MainActivity();
             reference2.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (hamid.checkIfUsername(username,snapshot)) {
+                    if (hamid2.checkIfUsername(username,snapshot)) {
                         showInvalidDialog("Username ou mot de passe", "le compte existe déja.");
                     }
                 }
