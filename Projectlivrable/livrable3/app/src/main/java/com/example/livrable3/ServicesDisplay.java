@@ -98,10 +98,20 @@ public class ServicesDisplay extends AppCompatActivity {
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent hamid = new Intent(getApplicationContext(),ServiceEditor.class);
-                hamid.putExtra("username", username);
-                hamid.putExtra("serviceName", serviceNames.get(position));
-                hamid.putExtra("service", serviceNames.get(position));
+                Intent hamid;
+                if(reg.getString("case").equals("Succursale")) {
+                    hamid = new Intent(getApplicationContext(),ServiceEditor.class);
+                    hamid.putExtra("service", serviceNames.get(position));
+                    hamid.putExtra("username", username);
+                    hamid.putExtra("serviceName", serviceNames.get(position));
+                }
+                else{
+                    hamid = new Intent(getApplicationContext(),ServiceEditor2.class);
+                    hamid.putExtra("service", serviceNames.get(position));
+                }
+//                hamid.putExtra("username", username);
+//                hamid.putExtra("serviceName", serviceNames.get(position));
+//                hamid.putExtra("service", serviceNames.get(position));
 
                 startActivity(hamid);
             }
@@ -142,21 +152,24 @@ public class ServicesDisplay extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String service= input.getText().toString();
                 reg = getIntent().getExtras();
-                Intent hamid= new Intent(getApplicationContext(),ServiceEditor.class);
+                Intent hamid;
+                for(int i = 0; i < 100000 ; i ++){
+                    Log.d(TAG, "THE case is the following: " + reg.getString("case"));
+                }
                 if(reg.getString("case").equals("Succursale")) {
+                    hamid = new Intent(getApplicationContext(),ServiceEditor.class);
                     hamid.putExtra("service", service);
                     hamid.putExtra("username", username);
                     hamid.putExtra("serviceName", "");
-                    hamid = new Intent(getApplicationContext(),ServiceEditor.class);
+                }
+                else if (reg.getString("case").equals("General")){
+                    hamid = new Intent(getApplicationContext(),ServiceEditor2.class);
+
+                    hamid.putExtra("service", service);
                 }
                 else{
-                    String test = service + ", Employé(e)";
-                    Log.d(TAG,test.split(",")[0] + " the next one is "+ test.split(",")[1]);
-                    hamid.putExtra("service", service);
                     hamid = new Intent(getApplicationContext(),ServiceEditor2.class);
                 }
-
-                Log.d(TAG, "THE USERNAME USERNAME USERNAME USERNAME USERNAME is the following: " + username);
                 addService(service);
 
                 startActivity(hamid);

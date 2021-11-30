@@ -34,18 +34,18 @@ public class ServiceEditor2 extends AppCompatActivity {
     DatabaseReference ref;
     DatabaseReference ref2;
     String serviceName;
-    String service;
+    String services;
     String username;
     String TAG = "TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_editor);
+        setContentView(R.layout.activity_service_editor2);
         Bundle reg = getIntent().getExtras();
-        username = reg.getString("username");
-        serviceName = reg.getString("serviceName");
-        service = reg.getString("service");
+//        username = reg.getString("username");
+//        serviceName = reg.getString("serviceName");
+        services = reg.getString("service");
         formNames = new ArrayList<String>();
         docNames = new ArrayList<String>();
         for (String elem:formNames) {
@@ -54,7 +54,9 @@ public class ServiceEditor2 extends AppCompatActivity {
         for (String elem:docNames) {
             Log.d(TAG, "DOOOOOOOOOCS ELEMENTS ARE: " + elem);
         }
-//        Log.d("TAG", "THE RECEIVED service IS THE FOLLOWING : "+ caseType);
+        for(int i = 0; i <10000; i++) {
+            Log.d("TAG", "THE RECEIVED service IS THE FOLLOWING : " + services);
+        }
         ListView formlist = (ListView) findViewById(R.id.formList);
         ListView doclist = (ListView) findViewById(R.id.docList);
 
@@ -67,7 +69,7 @@ public class ServiceEditor2 extends AppCompatActivity {
 
         formlist.setAdapter(myAdapter);
         doclist.setAdapter(myAdapter2);
-        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(service).child("formulaire");
+        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services).child("formulaire");
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override
@@ -132,7 +134,7 @@ public class ServiceEditor2 extends AppCompatActivity {
             }
         });
 
-        ref2 = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("document");
+        ref2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services).child("document");
         ref2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -265,12 +267,11 @@ public class ServiceEditor2 extends AppCompatActivity {
 
     public void FormulaireAdd(View view) {
         String champ = editForm.getText().toString();
-        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services);
         if(isDocValid(champ) && !formNames.contains(champ)){
             formNames.add(champ);
             ref.child("formulaire").child(champ).setValue("empty");
-            getIntent().putExtra("service", service);
-            getIntent().putExtra("serviceName", serviceName);
+            getIntent().putExtra("service", services);
             getIntent().putExtra("username", username);
 
             finish();
@@ -282,12 +283,11 @@ public class ServiceEditor2 extends AppCompatActivity {
     }
     public void DocumentsAdd(View view) {
         String champ = editDocs.getText().toString();
-        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services);
         if(!champ.equals("") && !docNames.contains(champ)){
             docNames.add(champ);
             ref.child("document").child(champ).setValue("empty");
-            getIntent().putExtra("service", service);
-            getIntent().putExtra("serviceName", serviceName);
+            getIntent().putExtra("service", services);
             getIntent().putExtra("username", username);
 
             finish();
