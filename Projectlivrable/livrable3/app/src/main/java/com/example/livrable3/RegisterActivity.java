@@ -1,4 +1,4 @@
-package com.example.project_livrable;
+package com.example.livrable3;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -136,19 +136,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
-<<<<<<< HEAD
             MainActivity hamid2 = new MainActivity();
             reference2.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (hamid2.checkIfUsername(username,snapshot)) {
-=======
-
-            reference2.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (hamigd.checkIfUsername(username,snapshot)) {
->>>>>>> ccf20ee26eae459705af90ec3884e198a88b575f
                         showInvalidDialog("Username ou mot de passe", "le compte existe déja.");
                     }
                 }

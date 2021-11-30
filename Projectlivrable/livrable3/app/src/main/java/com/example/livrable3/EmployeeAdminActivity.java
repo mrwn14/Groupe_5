@@ -1,4 +1,4 @@
-package com.example.project_livrable;
+package com.example.livrable3;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -39,14 +37,15 @@ public class EmployeeAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employee_admin);
+        setContentView(R.layout.activity_succ_admin);
         ListView myList = (ListView)findViewById(R.id.SuccListView);
         ArrayList<HelperClass> helisss = new ArrayList<HelperClass>();
         ArrayList<String> lissss = new ArrayList<String>();
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss);
         myList.setAdapter(myArrayAdapter);
-
         reg = getIntent().getExtras();
+        TextView txt = (TextView) findViewById(R.id.RoleAdmin);
+        txt.setText("Users");
 
         myref = FirebaseDatabase.getInstance().getReference().child(reg.getString("role"));
         myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
@@ -91,6 +90,8 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         });
     }
 
+    //I slept at 7am so dont wake me up, I sent the vid i used on discord
+    //Hope your understand shdrt
 
 
 
@@ -129,3 +130,4 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         }
     }
 }
+

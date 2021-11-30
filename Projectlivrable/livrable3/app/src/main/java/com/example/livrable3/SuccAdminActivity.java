@@ -1,4 +1,4 @@
-package com.example.project_livrable;
+package com.example.livrable3;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ThemedSpinnerAdapter;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.MediaCodec;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,37 +25,34 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class EmployeeAdminActivity extends AppCompatActivity {
+public class SuccAdminActivity extends AppCompatActivity {
 
     DatabaseReference myref;
     DatabaseReference myref2;
-    Bundle reg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employee_admin);
+        setContentView(R.layout.activity_succ_admin);
         ListView myList = (ListView)findViewById(R.id.SuccListView);
         ArrayList<HelperClass> helisss = new ArrayList<HelperClass>();
         ArrayList<String> lissss = new ArrayList<String>();
-        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss);
+        ArrayList<String> lissss2 = new ArrayList<String>();
+        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, lissss2);
         myList.setAdapter(myArrayAdapter);
 
-        reg = getIntent().getExtras();
-
-        myref = FirebaseDatabase.getInstance().getReference().child(reg.getString("role"));
+        myref = FirebaseDatabase.getInstance().getReference().child("Employé(e)");
         myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
-
         myref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 HelperClass value = snapshot.getValue(HelperClass.class);
                 lissss.add(value.getUsername());
+                lissss2.add("Succursale de " + value.getUsername());
                 helisss.add(value);
                 myArrayAdapter.notifyDataSetChanged();
             }
@@ -85,17 +82,30 @@ public class EmployeeAdminActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 String us = lissss.get(position);
+                lissss2.remove(position);
                 showDialog(us);
                 return true;
+            }
+        });
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent hamid = new Intent(getApplicationContext(),ServicesDisplay.class);
+                hamid.putExtra("username", lissss.get(position));
+                //hamid.putExtra("firstName", helisss.get(position).getFirstName());
+                startActivity(hamid);
             }
         });
     }
 
 
+    //I slept at 7am so dont wake me up, I sent the vid i used on discord
+    //Hope your understand shdrt
+
 
 
     public void showDialog(String username) {
-        AlertDialog.Builder dialogue = new AlertDialog.Builder(EmployeeAdminActivity.this);
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(SuccAdminActivity.this);
         //LayoutInflater layoutInflate= getLayoutInflater();
         //View dialogueView = layoutInflate.inflate(R.layout.activity_succ_list, null);
         //dialogue.setView(dialogueView);
@@ -112,20 +122,13 @@ public class EmployeeAdminActivity extends AppCompatActivity {
     }
 
     public void deleteSucc(String username) {
-        if(reg.getString("role").equals("Employé(e)")){
-            DatabaseReference toDelete = myref.child(username);
-            DatabaseReference toDelete2 = myref2.child(username+"_services");
+        DatabaseReference toDelete = myref.child(username);
+        DatabaseReference toDelete2 = myref2.child(username+"_services");
 
-            toDelete.removeValue();
-            toDelete2.removeValue();
-            finish();
-            startActivity(getIntent());
-        }
-        else {
-            DatabaseReference toDelete = myref.child(username);
-            toDelete.removeValue();
-            finish();
-            startActivity(getIntent());
-        }
+        toDelete.removeValue();
+        toDelete2.removeValue();
+        finish();
+        startActivity(getIntent());
     }
 }
+
