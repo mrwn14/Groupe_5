@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".TimeActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TimePicker
+                android:id="@+id/timePicker1"
+                android:layout_width="204dp"
+                android:layout_height="319dp" />
+
+            <TimePicker
+                android:id="@+id/timePicker2"
+                android:layout_width="207dp"
+                android:layout_height="319dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/SaveButton"
+                android:layout_width="231dp"
+                android:layout_height="wrap_content"
+                android:onClick="saveOnClick"
+                android:text="Save" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

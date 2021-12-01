@@ -266,9 +266,11 @@ public class ServiceEditor extends AppCompatActivity {
     public void FormulaireAdd(View view) {
         String champ = editForm.getText().toString();
         ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(username).child(service);
         if(isDocValid(champ) && !formNames.contains(champ)){
             formNames.add(champ);
             ref.child("formulaire").child(champ).setValue("empty");
+            ref2.child("formulaire").child(champ).setValue("empty");
             getIntent().putExtra("service", service);
             getIntent().putExtra("serviceName", serviceName);
             getIntent().putExtra("username", username);
@@ -283,9 +285,12 @@ public class ServiceEditor extends AppCompatActivity {
     public void DocumentsAdd(View view) {
         String champ = editDocs.getText().toString();
         ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(username).child(service);
         if(!champ.equals("") && !docNames.contains(champ)){
             docNames.add(champ);
             ref.child("document").child(champ).setValue("empty");
+            ref2.child("document").child(champ).setValue("empty");
+
             getIntent().putExtra("service", service);
             getIntent().putExtra("serviceName", serviceName);
             getIntent().putExtra("username", username);

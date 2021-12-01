@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                             registeredIntent.putExtra("firstName",loginMf.getFirstName());
                             registeredIntent.putExtra("role",loginMf.getRole());
                             registeredIntent.putExtra("username",loginMf.getUsername());
-
+                            Log.d("hamid", loginMf.getUsername());
                             startActivity(registeredIntent);
                         }
                         else{
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG,"reached here");
                 loginMf.setFirstName(ds.getValue(HelperClass.class).getFirstName());
                 loginMf.setRole(ds.getValue(HelperClass.class).getRole());
+                loginMf.setUsername(ds.getValue(HelperClass.class).getUsername());
                 return true;
             }
         }

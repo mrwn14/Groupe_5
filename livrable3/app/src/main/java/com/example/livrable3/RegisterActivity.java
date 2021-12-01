@@ -123,6 +123,30 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             hamid4.put("Identite", help4);
 
                             rootNode.getReference("Services").child(username+"_services").setValue(hamid4);
+                            HashMap hamid3 = new HashMap();
+                            hamid3.put("Adresse", " ");
+                            hamid3.put("Numero de téléphone", " ");
+                            hamid3.put("Heures de travail", "Click to see more");
+
+                            rootNode.getReference("Succursales").child(username).setValue(hamid3);
+
+
+
+                            HashMap hamid5 = new HashMap();
+                            hamid5.put("Start time", "08:00");
+                            hamid5.put("End time", "16:00");
+
+                            HashMap days = new HashMap();
+                            days.put("Lundi", hamid5);
+                            days.put("Mardi", hamid5);
+                            days.put("Mercredi", hamid5);
+                            days.put("Jeudi", hamid5);
+                            days.put("Vendredi", hamid5);
+                            days.put("Samedi", hamid5);
+                            days.put("Dimanche", hamid5);
+                            rootNode.getReference("Succursales").child(username).child("Heures de travail").setValue(days);
+
+
                         }
                         if (role.equals("Client")) {
                             reference.child(username).setValue(help);

@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ServicesDisplay extends AppCompatActivity {
     String serviceName;
     DatabaseReference referr;
     Bundle reg;
+    DatabaseReference rafa2;
 
     int compteur;
     @Override
@@ -56,8 +58,7 @@ public class ServicesDisplay extends AppCompatActivity {
             referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services");
         }
         else{
-            referr = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
-        }
+         }
         referr.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -189,20 +190,20 @@ public class ServicesDisplay extends AppCompatActivity {
     public void addService(String service) {
         DatabaseReference rafa;
         reg = getIntent().getExtras();
-        if(reg.getString("case").equals("Succursale")) {
-            rafa = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
-        }
-        else{
+        if (reg.getString("case").equals("Succursale")) {
+            rafa2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
+            rafa = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services");
+        } else {
             rafa = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
         }
         HashMap hamid = new HashMap();
-        hamid.put("Prenom","empty");
-        hamid.put("Nom","empty");
-        hamid.put("Date de naissance","empty");
-        hamid.put("Adresse","empty");
+        hamid.put("Prenom", "empty");
+        hamid.put("Nom", "empty");
+        hamid.put("Date de naissance", "empty");
+        hamid.put("Adresse", "empty");
 
-        HashMap hamid2 =  new HashMap();
-        hamid2.put("Preuve de domicile","empty");
+        HashMap hamid2 = new HashMap();
+        hamid2.put("Preuve de domicile", "empty");
 
         HashMap hamid4 = new HashMap();
 
@@ -210,7 +211,11 @@ public class ServicesDisplay extends AppCompatActivity {
         HelperService ser = new HelperService(service, username, hamid, hamid2);
         hamid4.put(service, ser);
         rafa.child(service).setValue(ser);
+        if (reg.getString("case").equals("Succursale")) {
+            rafa2.child(service).setValue(ser);
+        }
     }
+
 
     public void showDialog(String service) {
         AlertDialog.Builder dialogue = new AlertDialog.Builder(ServicesDisplay.this);
@@ -228,7 +233,27 @@ public class ServicesDisplay extends AppCompatActivity {
 
     public void deleteService(String service) {
         DatabaseReference toDelete = referr.child(service);
+        DatabaseReference toDelete2 = FirebaseDatabase.getInstance().getReference().child("Services");
+        if (!reg.getString("case").equals("Succursale")){
+            DatabaseReference referr2 = FirebaseDatabase.getInstance().getReference().child("Services");
+            referr2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        DataSnapshot toDELETE = ds.child(service);
+                        
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        if (reg.getString("case").equals("Succursale")){
+            toDelete2.removeValue();
+        }
         toDelete.removeValue();
         finish();
         startActivity(getIntent());

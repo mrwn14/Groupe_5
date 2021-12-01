@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,6 +28,9 @@ public class EmployeeInterface extends AppCompatActivity {
 
     public void succInfoOnClick(View view) {
         Intent succ = new Intent(getApplicationContext(), SuccInfoActivity.class);
+        username = reg.getString("username");
+        Log.d("hamid", username);
+
         succ.putExtra("username", username);
         startActivity(succ);
     }

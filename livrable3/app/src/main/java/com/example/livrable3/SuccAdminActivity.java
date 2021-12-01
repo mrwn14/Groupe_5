@@ -32,6 +32,7 @@ public class SuccAdminActivity extends AppCompatActivity {
 
     DatabaseReference myref;
     DatabaseReference myref2;
+    DatabaseReference myref3;
 
 
     @Override
@@ -47,6 +48,7 @@ public class SuccAdminActivity extends AppCompatActivity {
 
         myref = FirebaseDatabase.getInstance().getReference().child("Employé(e)");
         myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
+        myref3 = FirebaseDatabase.getInstance().getReference().child("Succursales");
         myref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -125,9 +127,11 @@ public class SuccAdminActivity extends AppCompatActivity {
     public void deleteSucc(String username) {
         DatabaseReference toDelete = myref.child(username);
         DatabaseReference toDelete2 = myref2.child(username+"_services");
+        DatabaseReference toDelete3 = myref3.child(username);
 
         toDelete.removeValue();
         toDelete2.removeValue();
+        toDelete3.removeValue();
         finish();
         startActivity(getIntent());
     }
