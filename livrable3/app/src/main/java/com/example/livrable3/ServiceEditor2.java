@@ -21,9 +21,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ServiceEditor2 extends AppCompatActivity {
 
@@ -273,6 +275,30 @@ public class ServiceEditor2 extends AppCompatActivity {
         if(isDocValid(champ) && !formNames.contains(champ)){
             formNames.add(champ);
             ref.child("formulaire").child(champ).setValue("empty");
+            DatabaseReference ref5 = FirebaseDatabase.getInstance().getReference().child("Services");
+            ref5.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        for (DataSnapshot ds2 : ds.getChildren()) {
+                            HashMap hh = (HashMap) ds2.getValue();
+                            Log.d(TAG, "AAAAAAA" + hh.toString());
+                            Set x = hh.keySet();
+                            for (Object elem : x) {
+                                elem = elem.toString();
+                                if (elem.equals(services)) {
+                                    ds2.getRef().child(services).child("formulaire").setValue(champ);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             getIntent().putExtra("service", services);
             getIntent().putExtra("username", username);
 

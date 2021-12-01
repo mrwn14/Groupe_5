@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.SyncStateContract;
 import android.text.InputType;
 import android.util.Log;
@@ -30,6 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Set;
 
 public class ServicesDisplay extends AppCompatActivity {
     final String TAG = "hamid <3";
@@ -58,7 +60,8 @@ public class ServicesDisplay extends AppCompatActivity {
             referr = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services");
         }
         else{
-         }
+            referr = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
+        }
         referr.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -240,8 +243,15 @@ public class ServicesDisplay extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                        DataSnapshot toDELETE = ds.child(service);
-                        
+                        Log.d(TAG, "COUNT1 IS: " + ds.getChildrenCount());
+                        HashMap hh = (HashMap) ds.getValue();
+                        Set x = hh.keySet();
+                        for (Object elem : x){
+                                elem = elem.toString();
+                                if (elem.equals(service)){
+                                    ds.getRef().child(service).removeValue();
+                                }
+                        }
                     }
                 }
 
