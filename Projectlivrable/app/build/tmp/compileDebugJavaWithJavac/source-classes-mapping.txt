@@ -1,0 +1,66 @@
+com/example/project_livrable/AdminInterface.java
+ com.example.project_livrable.AdminInterface
+com/example/project_livrable/HelperClass.java
+ com.example.project_livrable.HelperClass
+com/example/project_livrable/ServicesDisplay.java
+ com.example.project_livrable.ServicesDisplay
+ com.example.project_livrable.ServicesDisplay$1
+ com.example.project_livrable.ServicesDisplay$2
+ com.example.project_livrable.ServicesDisplay$3
+ com.example.project_livrable.ServicesDisplay$4
+ com.example.project_livrable.ServicesDisplay$5
+ com.example.project_livrable.ServicesDisplay$6
+com/example/project_livrable/databinding/ActivityServicesDisplayBinding.java
+ com.example.project_livrable.databinding.ActivityServicesDisplayBinding
+com/example/project_livrable/SuccAdminActivity.java
+ com.example.project_livrable.SuccAdminActivity
+ com.example.project_livrable.SuccAdminActivity$1
+ com.example.project_livrable.SuccAdminActivity$2
+ com.example.project_livrable.SuccAdminActivity$3
+ com.example.project_livrable.SuccAdminActivity$4
+com/example/project_livrable/databinding/ActivityServiceEditorBinding.java
+ com.example.project_livrable.databinding.ActivityServiceEditorBinding
+com/example/project_livrable/MainActivity.java
+ com.example.project_livrable.MainActivity
+ com.example.project_livrable.MainActivity$1
+com/example/project_livrable/databinding/ActivityWelcomePageBinding.java
+ com.example.project_livrable.databinding.ActivityWelcomePageBinding
+com/example/project_livrable/HelperService.java
+ com.example.project_livrable.HelperService
+com/example/project_livrable/databinding/ActivityMainBinding.java
+ com.example.project_livrable.databinding.ActivityMainBinding
+com/example/project_livrable/databinding/ActivitySuccAdminBinding.java
+ com.example.project_livrable.databinding.ActivitySuccAdminBinding
+com/example/project_livrable/databinding/ActivityAdminInterfaceBinding.java
+ com.example.project_livrable.databinding.ActivityAdminInterfaceBinding
+com/example/project_livrable/databinding/ActivityRegisterBinding.java
+ com.example.project_livrable.databinding.ActivityRegisterBinding
+com/example/project_livrable/RegisterActivity.java
+ com.example.project_livrable.RegisterActivity
+ com.example.project_livrable.RegisterActivity$1
+ com.example.project_livrable.RegisterActivity$2
+com/example/project_livrable/BuildConfig.java
+ com.example.project_livrable.BuildConfig
+com/example/project_livrable/EmployeeAdminActivity.java
+ com.example.project_livrable.EmployeeAdminActivity
+ com.example.project_livrable.EmployeeAdminActivity$1
+ com.example.project_livrable.EmployeeAdminActivity$2
+ com.example.project_livrable.EmployeeAdminActivity$3
+com/example/project_livrable/databinding/ActivityEmployeeAdminBinding.java
+ com.example.project_livrable.databinding.ActivityEmployeeAdminBinding
+com/example/project_livrable/WelcomePage.java
+ com.example.project_livrable.WelcomePage
+com/example/project_livrable/ServiceEditor.java
+ com.example.project_livrable.ServiceEditor
+ com.example.project_livrable.ServiceEditor$1
+ com.example.project_livrable.ServiceEditor$2
+ com.example.project_livrable.ServiceEditor$3
+ com.example.project_livrable.ServiceEditor$4
+ com.example.project_livrable.ServiceEditor$4$1
+ com.example.project_livrable.ServiceEditor$4$2
+ com.example.project_livrable.ServiceEditor$5
+ com.example.project_livrable.ServiceEditor$5$1
+ com.example.project_livrable.ServiceEditor$5$2
+ com.example.project_livrable.ServiceEditor$6
+ com.example.project_livrable.ServiceEditor$7
+ com.example.project_livrable.ServiceEditor$8

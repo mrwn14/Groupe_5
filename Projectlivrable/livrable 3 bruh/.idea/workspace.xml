@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e2c2e767-5828-4789-b55a-97a96f21c487" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../livrable3/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/androidTest/java/com/example/livrable3/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/AdminInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/EmployeeAdminActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/HelperClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/HelperService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/RegisterActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/ServiceEditor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/ServicesDisplay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/SuccAdminActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/java/com/example/livrable3/WelcomePage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_admin_interface.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_employee_admin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_service_editor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_services_display.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_succ_admin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/layout/activity_welcome_page.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/values/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/values/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/main/res/values/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/app/src/test/java/com/example/livrable3/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../livrable3/settings.gradle" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="21eLP5ImkDT9FDSoafoyMJDCqAV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e2c2e767-5828-4789-b55a-97a96f21c487" name="Default Changelist" comment="" />
+      <created>1638296578625</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1638296578625</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
