@@ -22,6 +22,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.Livrable3">
         <activity
+            android:name=".EmployeeServiceChoice"
+            android:exported="true" />
+        <activity
+            android:name=".EmployeeRequest"
+            android:exported="true" />
+        <activity
             android:name=".DaysActivity"
             android:exported="true" />
         <activity
