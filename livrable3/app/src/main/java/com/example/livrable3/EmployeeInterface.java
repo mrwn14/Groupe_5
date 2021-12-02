@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.IntSummaryStatistics;
+
 public class EmployeeInterface extends AppCompatActivity {
     Button succInfoButton;
     Button requestViewButton;
@@ -32,6 +34,16 @@ public class EmployeeInterface extends AppCompatActivity {
         Log.d("hamid", username);
 
         succ.putExtra("username", username);
+        startActivity(succ);
+    }
+
+    public void RequestOnClick(View view) {
+        Intent succ = new Intent(getApplicationContext(), EmployeeRequest.class);
+        startActivity(succ);
+    }
+
+    public void GeneralServicesOnClick(View view)  {
+        Intent succ = new Intent(getApplicationContext(), EmployeeServiceChoice.class);
         startActivity(succ);
     }
 }

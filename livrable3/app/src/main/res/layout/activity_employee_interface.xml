@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="206dp"
+            android:onClick="GeneralServicesOnClick"
             android:orientation="vertical">
 
             <Button
@@ -46,6 +47,7 @@
                 android:id="@+id/requestViewButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="RequestOnClick"
                 android:text="Mes demandes" />
         </LinearLayout>
     </LinearLayout>
