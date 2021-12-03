@@ -14,12 +14,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="206dp"
+            android:gravity="center"
             android:onClick="GeneralServicesOnClick"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/SuccInfoButton"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:onClick="succInfoOnClick"
                 android:text="informations" />
@@ -28,12 +29,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="202dp"
+            android:layout_height="248dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/servicesChoiceButton"
-                android:layout_width="match_parent"
+                android:layout_width="228dp"
                 android:layout_height="wrap_content"
                 android:onClick="GeneralServicesOnClick"
                 android:text="services offerts" />
@@ -42,11 +44,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/requestViewButton"
-                android:layout_width="match_parent"
+                android:layout_width="223dp"
                 android:layout_height="wrap_content"
                 android:onClick="RequestOnClick"
                 android:text="Mes demandes" />

@@ -109,12 +109,18 @@ public class SuccInfoActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String service= input.getText().toString();
-                            if(!service.equals("")) {
+                            if((!service.equals("") && validateAdress(service)) || (!service.equals("") && validateNumber(service))) {
                                 ref.child(generals.get(position).split(":")[0]).setValue(service);
                                 generals.remove(position);
                                 generals.add(service);
                                 finish();
                                 startActivity(getIntent());
+                            }
+                            else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(SuccInfoActivity.this);
+                                builder.setMessage("Champ Invalide, svp reessayer");
+                                AlertDialog alert = builder.create();
+                                alert.show();
                             }
                         }
                     });
@@ -185,5 +191,14 @@ public class SuccInfoActivity extends AppCompatActivity {
         toDelete.removeValue();
         finish();
         startActivity(getIntent());
+    }
+
+    public static boolean validateNumber(String number) {
+        return number.matches("^\\+([0-9\\-]?){9,11}[0-9]$");
+    }
+
+    public static boolean validateAdress(String address) {
+        return address.matches(
+                "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)" );
     }
 }

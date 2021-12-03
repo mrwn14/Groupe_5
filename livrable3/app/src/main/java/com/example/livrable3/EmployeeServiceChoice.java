@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 
 public class EmployeeServiceChoice extends AppCompatActivity {
-    ScrollView serviceChoice;
     DatabaseReference reff;
     DatabaseReference reff2;
     ArrayList<String> correctDocs;
@@ -52,6 +52,7 @@ public class EmployeeServiceChoice extends AppCompatActivity {
         ArrayAdapter myAdapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, correctDocs);
         choicelistview.setAdapter(myAdapter);
         choicelistview2.setAdapter(myAdapter2);
+        reff = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
 
         reff2 = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
         reff.addChildEventListener(new ChildEventListener() {
@@ -93,12 +94,14 @@ public class EmployeeServiceChoice extends AppCompatActivity {
                     correctDocs.remove(val);
                 }
                 myAdapter2.notifyDataSetChanged();
+                myAdapter.notifyDataSetChanged();
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 myAdapter2.notifyDataSetChanged();
+                myAdapter.notifyDataSetChanged();
 
             }
 
@@ -120,32 +123,62 @@ public class EmployeeServiceChoice extends AppCompatActivity {
         choicelistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                correctDocs.add(correctDocs2.get(position));
-                correctDocs2.remove(correctDocs.get(position));
+//                String test = correctDocs.get(position);
+//                correctDocs.add(correctDocs2.get(position));
+//                correctDocs2.remove(correctDocs.get(position));
+                if(correctDocs2.size()>3) {
+                    correctDocs.add(correctDocs2.get(position));
+                    correctDocs2.remove(position);
+                    myAdapter.notifyDataSetChanged();
+                    myAdapter2.notifyDataSetChanged();
+                }
+
+//                for(int i = 0; i < correctDocs.size(); i++){
+//                    try{
+//                        Log.d("hamid","CorrectDocs" + correctDocs.get(position));
+//                    }
+//                    catch (Exception e){
+//                        Log.d("hamid", "max length is "+i);
+//                    }
+//                }
+//                for(int i = 0; i < correctDocs2.size(); i++){
+//                    try{
+//                        Log.d("hamid","CorrectDocs2 " + correctDocs2.get(position));
+//                    }
+//                    catch (Exception e){
+//                        Log.d("hamid", "max length is "+i);
+//                    }
+//                }
             }
         });
         choicelistview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                correctDocs2.add(correctDocs.get(position));
-                correctDocs.remove(correctDocs.get(position));
+                    correctDocs2.add(correctDocs.get(position));
+                    correctDocs.remove(position);
+                    myAdapter.notifyDataSetChanged();
+                    myAdapter2.notifyDataSetChanged();
+
             }
         });
     }
 
-    public void add(int position) {
+    public void add(View view) {
         reff = FirebaseDatabase.getInstance().getReference().child("GeneralServices");
         reff2 = FirebaseDatabase.getInstance().getReference().child("Services").child(username+"_services");
-
-        reff2.addListenerForSingleValueEvent(new ValueEventListener() {
+        HashMap hh = new HashMap();
+        reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap gg = new HashMap();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (correctDocs2.contains(ds.getKey())) {
+                        hh.put(ds.getKey(), ds.getValue());
+                    }
+                }
+                reff2.setValue(hh);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

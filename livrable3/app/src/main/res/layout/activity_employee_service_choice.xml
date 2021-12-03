@@ -62,7 +62,7 @@
                 android:id="@+id/serviceChoiceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="saveDocs"
+                android:onClick="add"
                 android:text="Save" />
         </LinearLayout>
     </LinearLayout>
