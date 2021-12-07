@@ -22,6 +22,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.Livrable3">
         <activity
+            android:name=".Client_.ClientRatingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Client_.ClientServiceRequest"
+            android:exported="true" />
+        <activity
             android:name=".Client_.ClientServiceDisplay"
             android:exported="true" />
         <activity

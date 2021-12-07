@@ -39,6 +39,7 @@ public class EmployeeInterface extends AppCompatActivity {
 
     public void RequestOnClick(View view) {
         Intent succ = new Intent(getApplicationContext(), EmployeeRequest.class);
+        succ.putExtra("username",username);
         startActivity(succ);
     }
 

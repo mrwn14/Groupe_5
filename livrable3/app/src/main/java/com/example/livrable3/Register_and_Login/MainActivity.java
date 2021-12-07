@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                             registeredIntent.putExtra("firstName",loginMf.getFirstName());
                             registeredIntent.putExtra("role",loginMf.getRole());
                             registeredIntent.putExtra("username",loginMf.getUsername());
-
+                            registeredIntent.putExtra("dialog","0");
                             startActivity(registeredIntent);
                         }
 

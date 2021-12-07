@@ -31,36 +31,39 @@ public class EmployeeRequest extends AppCompatActivity {
     ArrayList<String> correctDocs2;
     ArrayList<String> notCorrectDocs;
     Bundle reg;
+    String username;
+    String client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_request);
+
+        reg = getIntent().getExtras();
+        username = reg.getString("username");
+        client = new String();
+
         correctDocs = new ArrayList<String>();
         correctDocs2 = new ArrayList<String>();
         notCorrectDocs = new ArrayList<String>();
 
-        reg = getIntent().getExtras();
-//        username = reg.getString("username");
         ListView choicelistview = (ListView) findViewById(R.id.PendingListView);
         ListView choicelistview2 = (ListView) findViewById(R.id.ApprovedListView);
+
         ArrayAdapter myAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, correctDocs2);
         ArrayAdapter myAdapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, correctDocs);
+
         choicelistview.setAdapter(myAdapter);
         choicelistview2.setAdapter(myAdapter2);
-        reff = FirebaseDatabase.getInstance().getReference().child("Requests").child("pending");
-//        String[] hamid = {"Truck rental","Visa","Study permit","High wifi speed", "Roof permit","Gun permit","Pregnant woman permit","Milkman service","LondonScammer permit"};
-//        for (String k :
-//                hamid) {
-//            reff.child("pending").child(k).setValue(k);
-//        }
-        reff2 = FirebaseDatabase.getInstance().getReference().child("Requests").child("approved");
+
+        reff = FirebaseDatabase.getInstance().getReference().child("Requests").child(username).child("pending");
+
         reff.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String val = snapshot.getKey();
-                correctDocs2.add(val);
-                Log.d("test", val);
+                String[] snapshots = snapshot.getKey().split("_");
+                client = snapshots[1];
+                correctDocs2.add(snapshots[0]+" from "+client);
                 myAdapter.notifyDataSetChanged();
 
             }
@@ -68,33 +71,6 @@ public class EmployeeRequest extends AppCompatActivity {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 myAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        reff2.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                myAdapter2.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                myAdapter2.notifyDataSetChanged();
 
             }
 
@@ -121,10 +97,12 @@ public class EmployeeRequest extends AppCompatActivity {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                String clientWithSpace = correctDocs2.get(position).split("from")[0];
+                                topSender(clientWithSpace.substring(0,clientWithSpace.length()-1));
                                 correctDocs.add(correctDocs2.get(position));
                                 correctDocs2.remove(position);
                                 add();
+
                                 myAdapter.notifyDataSetChanged();
                                 myAdapter2.notifyDataSetChanged();
 
@@ -177,5 +155,37 @@ public class EmployeeRequest extends AppCompatActivity {
             }
         });
 
+    }
+    public void topSender(String service){
+        reff2 = FirebaseDatabase.getInstance().getReference().child("Client_requests");
+        reff2.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.getKey().equals(client)){
+                    snapshot.child("approved").getRef().setValue(service);
+                    snapshot.child("pending").child(service).getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
