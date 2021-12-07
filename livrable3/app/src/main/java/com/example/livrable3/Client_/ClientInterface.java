@@ -23,7 +23,8 @@ public class ClientInterface extends AppCompatActivity {
         username = reg.getString("username");
     }
     public void acheterButtonOnClick(View view){
-        Intent purchaseItent = new Intent(getApplicationContext(), PurchaseActivity.class);
-        startActivity(purchaseItent);
+        Intent purchaseIntent = new Intent(getApplicationContext(), PurchaseActivity.class);
+        purchaseIntent.putExtra("username", username);
+        startActivity(purchaseIntent);
     }
 }

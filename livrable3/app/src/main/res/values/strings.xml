@@ -13,7 +13,7 @@
     </string-array>
     <string-array name="sort">
         <item>Adresse</item>
-        <item>Heure de travail</item>
+        <item>Heures de travail</item>
         <item>Services</item>
     </string-array>
 </resources>

@@ -38,6 +38,8 @@ public class TimeActivity extends AppCompatActivity {
         day = reg.getString("day");
         timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
         timePicker2 = (TimePicker) findViewById(R.id.timePicker2);
+        timePicker1.setIs24HourView(true);
+        timePicker2.setIs24HourView(true);
         ref = FirebaseDatabase.getInstance().getReference().child("Succursales").child(username).child("Heures de travail").child(day);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -22,6 +22,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.Livrable3">
         <activity
+            android:name=".Client_.ClientServiceDisplay"
+            android:exported="true" />
+        <activity
             android:name=".Client_.PurchaseActivity"
             android:exported="true" />
         <activity
