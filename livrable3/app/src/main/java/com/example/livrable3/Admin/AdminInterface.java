@@ -1,10 +1,13 @@
-package com.example.livrable3;
+package com.example.livrable3.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.livrable3.R;
+import com.example.livrable3.ServicesDisplay;
 
 public class AdminInterface extends AppCompatActivity {
 

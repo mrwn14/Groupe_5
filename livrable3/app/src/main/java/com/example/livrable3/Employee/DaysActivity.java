@@ -1,16 +1,16 @@
-package com.example.livrable3;
+package com.example.livrable3.Employee;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.sql.Time;
+import com.example.livrable3.R;
+
 import java.util.ArrayList;
 
 public class DaysActivity extends AppCompatActivity {

@@ -8,8 +8,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.SyncStateContract;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -19,18 +17,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.livrable3.Admin.ServiceEditor;
+import com.example.livrable3.Admin.ServiceEditor2;
+import com.example.livrable3.Helpers.HelperService;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Set;
 
 public class ServicesDisplay extends AppCompatActivity {
@@ -104,13 +102,13 @@ public class ServicesDisplay extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent hamid;
                 if(reg.getString("case").equals("Succursale")) {
-                    hamid = new Intent(getApplicationContext(),ServiceEditor.class);
+                    hamid = new Intent(getApplicationContext(), ServiceEditor.class);
                     hamid.putExtra("service", serviceNames.get(position));
                     hamid.putExtra("username", username);
                     hamid.putExtra("serviceName", serviceNames.get(position));
                 }
                 else{
-                    hamid = new Intent(getApplicationContext(),ServiceEditor2.class);
+                    hamid = new Intent(getApplicationContext(), ServiceEditor2.class);
                     hamid.putExtra("service", serviceNames.get(position));
                 }
 //                hamid.putExtra("username", username);

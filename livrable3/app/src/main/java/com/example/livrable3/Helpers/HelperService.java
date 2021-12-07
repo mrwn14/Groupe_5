@@ -1,4 +1,4 @@
-package com.example.livrable3;
+package com.example.livrable3.Helpers;
 
 import java.util.HashMap;
 import java.util.Hashtable;

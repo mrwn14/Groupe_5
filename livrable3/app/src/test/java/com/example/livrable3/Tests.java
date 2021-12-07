@@ -1,10 +1,12 @@
 package com.example.livrable3;
 import static org.junit.Assert.*;
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
-import android.util.Patterns;
+
+import com.example.livrable3.Admin.ServiceEditor;
+import com.example.livrable3.Employee.SuccInfoActivity;
+
+import com.example.livrable3.Register_and_Login.RegisterActivity;
 
 public class Tests {
     @Test

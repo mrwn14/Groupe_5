@@ -1,4 +1,4 @@
-package com.example.livrable3;
+package com.example.livrable3.Register_and_Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.livrable3.Admin.AdminInterface;
+import com.example.livrable3.Employee.EmployeeInterface;
+import com.example.livrable3.Helpers.HelperClass;
+import com.example.livrable3.R;
+import com.example.livrable3.Client_.ClientInterface;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,9 +82,11 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(registeredIntent);
                         }
                         else{
-                            Intent registeredIntent = new Intent(getApplicationContext(), WelcomePage.class);
+                            Intent registeredIntent = new Intent(getApplicationContext(), ClientInterface.class);
                             registeredIntent.putExtra("firstName",loginMf.getFirstName());
                             registeredIntent.putExtra("role",loginMf.getRole());
+                            registeredIntent.putExtra("username",loginMf.getUsername());
+
                             startActivity(registeredIntent);
                         }
 

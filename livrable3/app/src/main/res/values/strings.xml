@@ -11,4 +11,9 @@
         <item>Employé(e)</item>
         <item>Client</item>
     </string-array>
+    <string-array name="sort">
+        <item>Adresse</item>
+        <item>Heure de travail</item>
+        <item>Services</item>
+    </string-array>
 </resources>

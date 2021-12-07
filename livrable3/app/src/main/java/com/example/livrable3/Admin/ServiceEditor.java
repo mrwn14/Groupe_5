@@ -1,4 +1,4 @@
-package com.example.livrable3;
+package com.example.livrable3.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -16,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.livrable3.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ServiceEditor2 extends AppCompatActivity {
+public class ServiceEditor extends AppCompatActivity {
 
     EditText editForm;
     EditText editDocs;
@@ -36,18 +36,18 @@ public class ServiceEditor2 extends AppCompatActivity {
     DatabaseReference ref;
     DatabaseReference ref2;
     String serviceName;
-    String services;
+    String service;
     String username;
     String TAG = "TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_editor2);
+        setContentView(R.layout.activity_service_editor);
         Bundle reg = getIntent().getExtras();
-//        username = reg.getString("username");
-//        serviceName = reg.getString("serviceName");
-        services = reg.getString("service");
+        username = reg.getString("username");
+        serviceName = reg.getString("serviceName");
+        service = reg.getString("service");
         formNames = new ArrayList<String>();
         docNames = new ArrayList<String>();
         for (String elem:formNames) {
@@ -56,9 +56,7 @@ public class ServiceEditor2 extends AppCompatActivity {
         for (String elem:docNames) {
             Log.d(TAG, "DOOOOOOOOOCS ELEMENTS ARE: " + elem);
         }
-        for(int i = 0; i <10000; i++) {
-            Log.d("TAG", "THE RECEIVED service IS THE FOLLOWING : " + services);
-        }
+//        Log.d("TAG", "THE RECEIVED service IS THE FOLLOWING : "+ caseType);
         ListView formlist = (ListView) findViewById(R.id.formList);
         ListView doclist = (ListView) findViewById(R.id.docList);
 
@@ -71,14 +69,14 @@ public class ServiceEditor2 extends AppCompatActivity {
 
         formlist.setAdapter(myAdapter);
         doclist.setAdapter(myAdapter2);
-        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services).child("formulaire");
+            ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("formulaire");
 
         ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String documentIterable = snapshot.getValue(String.class);
-                String hamid = snapshot.getKey();
-                formNames.add(hamid);
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    String documentIterable = snapshot.getValue(String.class);
+                    String hamid = snapshot.getKey();
+                    formNames.add(hamid);
 //                    Log.d(TAG, "started");
 //                    while(documentIterable.iterator().hasNext()) {
 //                        Log.d(TAG, "onChildAdded: " + documentIterable.iterator().next());
@@ -100,7 +98,7 @@ public class ServiceEditor2 extends AppCompatActivity {
 //
 //                        }
 
-                myAdapter.notifyDataSetChanged();
+                        myAdapter.notifyDataSetChanged();
 
 
 
@@ -112,31 +110,31 @@ public class ServiceEditor2 extends AppCompatActivity {
 //                    myAdapter.notifyDataSetChanged();
 //                    myAdapter2.notifyDataSetChanged();
 
-            }
+                }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                myAdapter.notifyDataSetChanged();
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    myAdapter.notifyDataSetChanged();
 
-            }
+                }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-            }
+                }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
 
-        ref2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services).child("document");
+        ref2 = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service).child("document");
         ref2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -178,9 +176,9 @@ public class ServiceEditor2 extends AppCompatActivity {
         formlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ServiceEditor2.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ServiceEditor.this);
                 builder.setTitle("Changer le nom du champ: ");
-                final EditText input = new EditText(ServiceEditor2.this);
+                final EditText input = new EditText(ServiceEditor.this);
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -193,11 +191,9 @@ public class ServiceEditor2 extends AppCompatActivity {
                             hamid.removeValue();
                             formNames.remove(position);
                             formNames.add(service);
-                            finish();
-                            startActivity(getIntent());
                         }
                         else{
-                            AlertDialog.Builder build = new AlertDialog.Builder(ServiceEditor2.this);
+                            AlertDialog.Builder build = new AlertDialog.Builder(ServiceEditor.this);
                             build.setMessage("Can't change, empty input.");
                             AlertDialog alert = build.create();
                             alert.show();
@@ -221,9 +217,9 @@ public class ServiceEditor2 extends AppCompatActivity {
         doclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ServiceEditor2.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ServiceEditor.this);
                 builder.setTitle("Changer le nom du champ: ");
-                final EditText input = new EditText(ServiceEditor2.this);
+                final EditText input = new EditText(ServiceEditor.this);
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -238,7 +234,7 @@ public class ServiceEditor2 extends AppCompatActivity {
                             docNames.add(service);
                         }
                         else{
-                            AlertDialog.Builder build = new AlertDialog.Builder(ServiceEditor2.this);
+                            AlertDialog.Builder build = new AlertDialog.Builder(ServiceEditor.this);
                             build.setMessage("Can't change, empty input.");
                             AlertDialog alert = build.create();
                             alert.show();
@@ -271,35 +267,14 @@ public class ServiceEditor2 extends AppCompatActivity {
 
     public void FormulaireAdd(View view) {
         String champ = editForm.getText().toString();
-        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services);
+        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(username).child(service);
         if(isDocValid(champ) && !formNames.contains(champ)){
             formNames.add(champ);
             ref.child("formulaire").child(champ).setValue("empty");
-            DatabaseReference ref5 = FirebaseDatabase.getInstance().getReference().child("Services");
-            ref5.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        for (DataSnapshot ds2 : ds.getChildren()) {
-                            HashMap hh = (HashMap) ds2.getValue();
-                            Log.d(TAG, "AAAAAAA" + hh.toString());
-                            Set x = hh.keySet();
-                            for (Object elem : x) {
-                                elem = elem.toString();
-                                if (elem.equals(services)) {
-                                    ds2.getRef().child(services).child("formulaire").setValue(champ);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            getIntent().putExtra("service", services);
+            ref2.child("formulaire").child(champ).setValue("empty");
+            getIntent().putExtra("service", service);
+            getIntent().putExtra("serviceName", serviceName);
             getIntent().putExtra("username", username);
 
             finish();
@@ -311,11 +286,15 @@ public class ServiceEditor2 extends AppCompatActivity {
     }
     public void DocumentsAdd(View view) {
         String champ = editDocs.getText().toString();
-        ref = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(services);
+        ref = FirebaseDatabase.getInstance().getReference().child("Services").child(username + "_services").child(service);
+        ref2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(username).child(service);
         if(!champ.equals("") && !docNames.contains(champ)){
             docNames.add(champ);
             ref.child("document").child(champ).setValue("empty");
-            getIntent().putExtra("service", services);
+            ref2.child("document").child(champ).setValue("empty");
+
+            getIntent().putExtra("service", service);
+            getIntent().putExtra("serviceName", serviceName);
             getIntent().putExtra("username", username);
 
             finish();
@@ -327,7 +306,7 @@ public class ServiceEditor2 extends AppCompatActivity {
     }
 
     public void showDialogForm(String champ) {
-        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServiceEditor2.this);
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServiceEditor.this);
         dialogue.setMessage("Do you want to delete?")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -340,7 +319,7 @@ public class ServiceEditor2 extends AppCompatActivity {
         alert.show();
     }
     public void showDialogDoc(String champ) {
-        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServiceEditor2.this);
+        AlertDialog.Builder dialogue = new AlertDialog.Builder(ServiceEditor.this);
         dialogue.setMessage("Do you want to delete?")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -355,7 +334,37 @@ public class ServiceEditor2 extends AppCompatActivity {
 
     public void deleteChampForm(String champ) {
         DatabaseReference toDelete = ref.child(champ);
-
+        /*
+        */
+//        DatabaseReference referr2 = FirebaseDatabase.getInstance().getReference().child("Services");
+//        referr2.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot ds : snapshot.getChildren()) {
+//                    for (DataSnapshot hamid : ds.getChildren()) {
+//                        Log.d(TAG, "COUNT1 IS: " + hamid.getChildrenCount());
+//                        if(hamid.getKey().equals(service)){
+//                            hamid.child("formulaire").child(champ).getRef().removeValue();
+//                        }
+////                        HashMap hh = (HashMap) hamid.getValue();
+////                        Set x = hh.keySet();
+////                        for (Object elem : x) {
+////                            elem = elem.toString();
+////                            if (elem.equals(service)) {
+////                                ds.getRef().child(service).removeValue();
+////                            }
+////                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+        /*
+         */
         toDelete.removeValue();
         finish();
         startActivity(getIntent());

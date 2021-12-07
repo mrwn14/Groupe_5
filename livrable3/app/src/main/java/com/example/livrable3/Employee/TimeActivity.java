@@ -1,4 +1,4 @@
-package com.example.livrable3;
+package com.example.livrable3.Employee;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TimePicker;
 import android.os.Bundle;
 
+import com.example.livrable3.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

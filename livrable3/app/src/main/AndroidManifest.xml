@@ -22,49 +22,52 @@
         android:testOnly="true"
         android:theme="@style/Theme.Livrable3">
         <activity
-            android:name=".EmployeeServiceChoice"
+            android:name=".Client_.PurchaseActivity"
             android:exported="true" />
         <activity
-            android:name=".EmployeeRequest"
+            android:name=".Employee.EmployeeServiceChoice"
             android:exported="true" />
         <activity
-            android:name=".DaysActivity"
+            android:name=".Employee.EmployeeRequest"
             android:exported="true" />
         <activity
-            android:name=".TimeActivity"
+            android:name=".Employee.DaysActivity"
             android:exported="true" />
         <activity
-            android:name=".ServiceEditor2"
+            android:name=".Employee.TimeActivity"
             android:exported="true" />
         <activity
-            android:name=".SuccInfoActivity"
+            android:name=".Admin.ServiceEditor2"
             android:exported="true" />
         <activity
-            android:name=".EmployeeInterface"
+            android:name=".Employee.SuccInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Employee.EmployeeInterface"
             android:exported="true" />
         <activity
             android:name=".ServicesDisplay"
             android:exported="true" />
         <activity
-            android:name=".EmployeeAdminActivity"
+            android:name=".Admin.EmployeeAdminActivity"
             android:exported="true" />
         <activity
-            android:name=".ServiceEditor"
+            android:name=".Admin.ServiceEditor"
             android:exported="true" />
         <activity
-            android:name=".SuccAdminActivity"
+            android:name=".Admin.SuccAdminActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminInterface"
+            android:name=".Admin.AdminInterface"
             android:exported="true" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Register_and_Login.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".WelcomePage"
+            android:name=".Client_.ClientInterface"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Register_and_Login.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

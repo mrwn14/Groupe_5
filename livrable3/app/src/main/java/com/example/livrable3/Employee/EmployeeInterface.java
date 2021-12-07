@@ -1,4 +1,4 @@
-package com.example.livrable3;
+package com.example.livrable3.Employee;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.IntSummaryStatistics;
+import com.example.livrable3.R;
 
 public class EmployeeInterface extends AppCompatActivity {
     Button succInfoButton;

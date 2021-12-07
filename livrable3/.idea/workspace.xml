@@ -12,7 +12,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b5f3f53-0743-46cc-8bbc-ad795d9a9925" name="Default Changelist" comment="" />
+    <list default="true" id="7b5f3f53-0743-46cc-8bbc-ad795d9a9925" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Projectlivrable/livrable3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Projectlivrable/livrable3/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +85,7 @@
     <property name="android-custom-view/Users/tawfiqabubaker/Library/Android/sdk/sources/android-31/android/widget/AdapterView.java_AdapterView_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-view/Users/tawfiqabubaker/Library/Android/sdk/sources/android-31/android/widget/AdapterView.java_SELECTED" value="AdapterView" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1638295890467" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1638834968095" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -97,11 +99,17 @@
     <key name="android.template.-861404473">
       <recent name="com.example.livrable3" />
     </key>
+    <key name="android.template.-1384633430">
+      <recent name="com.example.livrable3.Client_" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.livrable3" />
+    </key>
     <key name="android.template.-917981493">
       <recent name="com.example.livrable3" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests">
+  <component name="RunManager" selected="Android App.app">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="livrable_3_bruh.app" />
       <option name="DEPLOY" value="true" />

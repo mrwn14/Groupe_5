@@ -1,4 +1,4 @@
-package com.example.livrable3;
+package com.example.livrable3.Register_and_Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -6,14 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.regex.*;
 
 
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.livrable3.Helpers.HelperClass;
+import com.example.livrable3.Helpers.HelperService;
+import com.example.livrable3.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -114,12 +113,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             HashMap hamid2 = new HashMap();
                             hamid2.put("Preuve de domicile","empty");
 
-                            Hashtable<String,HelperService> hamid4 = new Hashtable<String,HelperService>();
-                            HelperService help2 = new HelperService("Permis",username,hamid,hamid2);
-                            HelperService help3 = new HelperService("CarteSante",username,hamid,hamid2);
+                            Hashtable<String, HelperService> hamid4 = new Hashtable<String,HelperService>();
+                            HelperService help2 = new HelperService("Permis de conduite",username,hamid,hamid2);
+                            HelperService help3 = new HelperService("Carte Sante",username,hamid,hamid2);
                             HelperService help4 = new HelperService("Identite",username,hamid,hamid2);
-                            hamid4.put("Permis", help2);
-                            hamid4.put("CarteSante", help3);
+                            hamid4.put("Permis de conduite", help2);
+                            hamid4.put("Carte Sante", help3);
                             hamid4.put("Identite", help4);
 
                             rootNode.getReference("Services").child(username+"_services").setValue(hamid4);

@@ -1,31 +1,27 @@
-package com.example.livrable3;
+package com.example.livrable3.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ThemedSpinnerAdapter;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaCodec;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.livrable3.Helpers.HelperClass;
+import com.example.livrable3.R;
+import com.example.livrable3.ServicesDisplay;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SuccAdminActivity extends AppCompatActivity {
@@ -92,7 +88,7 @@ public class SuccAdminActivity extends AppCompatActivity {
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent hamid = new Intent(getApplicationContext(),ServicesDisplay.class);
+                Intent hamid = new Intent(getApplicationContext(), ServicesDisplay.class);
                 hamid.putExtra("username", lissss.get(position));
                 hamid.putExtra("case", "Succursale");
                 //hamid.putExtra("firstName", helisss.get(position).getFirstName());
