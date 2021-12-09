@@ -30,7 +30,7 @@
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Requettes en cours de triatement" />
+                android:text="Requettes en cours de traitement" />
         </LinearLayout>
 
         <LinearLayout

@@ -233,35 +233,24 @@ public class ServicesDisplay extends AppCompatActivity {
     }
 
     public void deleteService(String service) {
-//        DatabaseReference toDelete = referr.child(service);
-        DatabaseReference toDelete2 = FirebaseDatabase.getInstance().getReference().child("GeneralServices").child(service);
-        if (reg.getString("case").equals("Succursale")){
+        DatabaseReference toDelete = referr.child(service);
+        DatabaseReference toDelete2 = FirebaseDatabase.getInstance().getReference().child("Services");
+        if (!reg.getString("case").equals("Succursale")){
             DatabaseReference referr2 = FirebaseDatabase.getInstance().getReference().child("Services");
+
             referr2.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     Log.d("tag","username is :"+username);
                     Log.d("tag","snapshot is :"+snapshot.getKey());
-                    if (snapshot.getKey().equals(username+"_services")) {
-                        Log.d("tag","reached here");
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Log.d("tag","9lawi is :"+ds.getKey());
 
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            Log.d("tag","9lawi is :"+ds.getKey());
-
-                            if (ds.getKey().equals(service)) {
+                        if (ds.getKey().equals(service)) {
                                 ds.getRef().removeValue();
-                            }
-//                        Log.d(TAG, "COUNT1 IS: " + ds.getChildrenCount());
-//                        HashMap hh = (HashMap) ds.getValue();
-//                        Set x = hh.keySet();
-//                        for (Object elem : x){
-//                                elem = elem.toString();
-//                                if (elem.equals(service)){
-//                                    ds.getRef().child(service).removeValue();
-//                                }
-//                        }
                         }
                     }
+
                 }
 
                 @Override
@@ -285,11 +274,11 @@ public class ServicesDisplay extends AppCompatActivity {
                 }
             });
         }
-
-        if (reg.getString("case").equals("General")){
-            toDelete2.removeValue();
+        if (reg.getString("case").equals("Succursale")){
+            toDelete2.child(username+"_services").child(service).removeValue();
+            FirebaseDatabase.getInstance().getReference().child("Ratings").child(username).child(service).removeValue();
         }
-//        toDelete.removeValue();
+        toDelete.removeValue();
         finish();
         startActivity(getIntent());
 

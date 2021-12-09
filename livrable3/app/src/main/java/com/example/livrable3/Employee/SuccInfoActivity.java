@@ -202,4 +202,7 @@ public class SuccInfoActivity extends AppCompatActivity {
         return address.matches(
                 "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)" );
     }
+    public static boolean textInputValidator(String test){
+        return !test.equals("") && !test.contains(":");
+    }
 }

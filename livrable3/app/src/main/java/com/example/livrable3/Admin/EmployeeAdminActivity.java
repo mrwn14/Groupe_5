@@ -28,6 +28,7 @@ public class EmployeeAdminActivity extends AppCompatActivity {
     DatabaseReference myref;
     DatabaseReference myref2;
     DatabaseReference myref3;
+    DatabaseReference myref4;
     Bundle reg;
 
     @Override
@@ -46,6 +47,7 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         myref = FirebaseDatabase.getInstance().getReference().child(reg.getString("role"));
         myref2 = FirebaseDatabase.getInstance().getReference().child("Services");
         myref3 = FirebaseDatabase.getInstance().getReference().child("Succursales");
+        myref4 = FirebaseDatabase.getInstance().getReference().child("Client_requests");
 
         myref.addChildEventListener(new ChildEventListener() {
             @Override
@@ -123,7 +125,10 @@ public class EmployeeAdminActivity extends AppCompatActivity {
         }
         else {
             DatabaseReference toDelete = myref.child(username);
+            DatabaseReference toDelete2 = myref4.child(username);
+
             toDelete.removeValue();
+            toDelete2.removeValue();
             finish();
             startActivity(getIntent());
         }

@@ -37,6 +37,8 @@ public class ClientServiceDisplay extends AppCompatActivity {
     DatabaseReference reff;
     DatabaseReference reff2;
     String message;
+    int counterino = 0;
+    boolean noDoubleTag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,17 +103,34 @@ public class ClientServiceDisplay extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder build = new AlertDialog.Builder(ClientServiceDisplay.this);
-                build.setMessage("No ratings so far");
+                Log.d(TAG, "Here");
+                noDoubleTag = false;
+                reff2 = FirebaseDatabase.getInstance().getReference().child("Ratings");
 
                 reff2.addChildEventListener(new ChildEventListener() {
+                    int counter = 0;
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Log.d(TAG, snapshot.getKey());
-                        if(services.contains(snapshot.getKey())){
-                            messageChanger("Rating is "+ snapshot.child("rating").getValue());
+                        if (snapshot.getKey().equals(employee)) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                Log.d(TAG, ds.getKey());
+                                Log.d(TAG, services.get(position));
+                                if (ds.getKey().equals(services.get(position))) {
+                                    Log.d(TAG, "I'm here my dude");
+                                    messageChanger("Rating is " + ds.child("rating").getValue()+" ⭐️");
+                                    Log.d(TAG, message);
+                                    showdialog(message);
+                                    noDoubleTag = true;
+                                }
+                            }
+                        }
+                        counter += 1;
+                        Log.d(TAG, "Children count " + getChildrenCount());
+                        Log.d(TAG, "counter " + counter);
+                        if(counter == getChildrenCount()&& noDoubleTag == false){
+                            showdialog("No ratings so far");
                         }
                     }
-
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -132,16 +151,56 @@ public class ClientServiceDisplay extends AppCompatActivity {
 
                     }
                 });
-                build.setMessage(message);
-                messageChanger("No ratings so far");
-                AlertDialog alert = build.create();
-                alert.show();
                 return true;
             }
         });
 
     }
+    public void showdialog(String msg){
+        AlertDialog.Builder build = new AlertDialog.Builder(ClientServiceDisplay.this);
+        build.setMessage(msg);
+        AlertDialog alert = build.create();
+        alert.show();
+    }
     public void messageChanger(String message2){
         message = message2;
     }
+    public int getChildrenCount(){
+        int count = 0;
+        DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference();
+        reff2.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.getKey().equals("Ratings")){
+                    setCount(snapshot.getChildrenCount());
+                };
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return counterino;
+
+    }
+    public void setCount(long k){
+        counterino = (int) k;
+    }
+
 }

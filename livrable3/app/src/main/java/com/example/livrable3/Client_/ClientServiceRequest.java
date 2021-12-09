@@ -44,6 +44,8 @@ public class ClientServiceRequest extends AppCompatActivity {
     DatabaseReference reff;
     DatabaseReference reff3;
     HashMap Daddy;
+    int sizerino = 0;
+
     HashMap formulaire;
     HashMap document;
     @Override
@@ -76,6 +78,7 @@ public class ClientServiceRequest extends AppCompatActivity {
 //                    Daddy.put("document",document);
 //                }
                 if(snapshot.getKey().equals("formulaire")){
+                    sizerino = (int) snapshot.getChildrenCount();
                     for (DataSnapshot k : snapshot.getChildren()){
                         formulaire.put(k.getKey(),k.getValue());
                         services.add(k.getKey());
@@ -148,25 +151,48 @@ public class ClientServiceRequest extends AppCompatActivity {
     }
 
     public void submitOnClick(View view) throws InterruptedException {
-        reff = FirebaseDatabase.getInstance().getReference().child("Client_requests").child(username).child("pending").child(service);
-        reff3 = FirebaseDatabase.getInstance().getReference().child("Requests").child(employee).child("pending").child(service+"_"+username);
-        if (services.size() == added.size()){
-            reff.setValue(Daddy);
-            reff3.setValue(Daddy);
+        HashMap form = (HashMap) Daddy.get("formulaire");
+        if(form != null && form.size()>=sizerino) {
+            if (prenomValidator((String) form.get("Prenom")) && nomValidator((String) form.get("Nom")) && dateDeNaissanceValidator((String) form.get("Date de naissance")) && adresseValidator((String) form.get("Adresse"))) {
+                reff = FirebaseDatabase.getInstance().getReference().child("Client_requests").child(username).child("pending").child(service);
+                reff3 = FirebaseDatabase.getInstance().getReference().child("Requests").child(employee).child("pending").child(service + "_" + username);
+                if (services.size() == added.size()) {
+                    reff.setValue(Daddy);
+                    reff3.setValue(Daddy);
 
-            Intent hamid = new Intent(getApplicationContext(),ClientRatingActivity.class);
-            hamid.putExtra("username",username);
-            hamid.putExtra("employee",employee);
-            hamid.putExtra("service",service);
-            hamid.putExtra("dialog","1");
-            startActivity(hamid);
+                    Intent hamid = new Intent(getApplicationContext(), ClientRatingActivity.class);
+                    hamid.putExtra("username", username);
+                    hamid.putExtra("employee", employee);
+                    hamid.putExtra("service", service);
+                    hamid.putExtra("dialog", "1");
+                    startActivity(hamid);
 
-        }
-        else {
+                }
+            } else {
+                AlertDialog.Builder build = new AlertDialog.Builder(ClientServiceRequest.this);
+                build.setMessage("Champ Invalide");
+                AlertDialog alert = build.create();
+                alert.show();
+            }
+        } else {
             AlertDialog.Builder build = new AlertDialog.Builder(ClientServiceRequest.this);
             build.setMessage("Vous devez remplir tout les champs");
             AlertDialog alert = build.create();
             alert.show();
         }
+    }
+    public static boolean nomValidator(String test){
+        return  test.matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$");
+    }
+    public static boolean prenomValidator(String test){
+        return  test.matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$");
+    }
+    public static boolean dateDeNaissanceValidator(String test){
+        String[] testArray = test.split("/");
+        return testArray.length == 3 && testArray[0].length() == 2 && testArray[1].length() == 2 && testArray[2].length() == 4;
+    }
+    public static boolean adresseValidator(String address) {
+        return address.matches(
+                "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)" );
     }
 }
