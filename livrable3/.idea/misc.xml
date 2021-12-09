@@ -17,10 +17,12 @@
         <entry key="app/src/main/res/layout/activity_client_service_display.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_client_service_request.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_days.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_employe_client_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_employee_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_employee_interface.xml" value="0.16032608695652173" />
         <entry key="app/src/main/res/layout/activity_employee_request.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_employee_service_choice.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.16032608695652173" />
         <entry key="app/src/main/res/layout/activity_purchase.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />

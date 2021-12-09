@@ -152,7 +152,7 @@ public class PurchaseActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (look.equals("Services") && ds.getValue().toString().contains(val)) {
-                        searchResults.add(snapshot.getKey().split("_")[0]);
+                        searchResults.add(ds.getKey().toString() +" from "+ snapshot.getKey().split("_")[0]);
                         searchResultsNames.add(snapshot.getKey().split("_")[0]);
                         for (int i = 0; i < searchResults.size(); i++) {
                             Log.d(TAG, searchResults.get(i));

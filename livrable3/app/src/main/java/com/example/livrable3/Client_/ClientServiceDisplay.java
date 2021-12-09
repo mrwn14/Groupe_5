@@ -2,6 +2,7 @@ package com.example.livrable3.Client_;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -35,6 +36,7 @@ public class ClientServiceDisplay extends AppCompatActivity {
     ArrayAdapter myAdapter;
     DatabaseReference reff;
     DatabaseReference reff2;
+    String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,13 @@ public class ClientServiceDisplay extends AppCompatActivity {
         myAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, services);
         myList.setAdapter(myAdapter);
         reff = FirebaseDatabase.getInstance().getReference().child("Services").child(employee+"_services");
+        reff2 = FirebaseDatabase.getInstance().getReference().child("Ratings").child(employee);
         reff.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (!services.contains(snapshot.getKey())) {
+                        snapshot.getRef();
                         services.add(snapshot.getKey());
                     }
                 }
@@ -90,58 +94,54 @@ public class ClientServiceDisplay extends AppCompatActivity {
                 requestIntent.putExtra("username",username);
                 requestIntent.putExtra("employeeName",employee);
                 startActivity(requestIntent);
-//                reff = FirebaseDatabase.getInstance().getReference().child("Services").child(employee+"_services").child(services.get(position));
-//                reff2 = FirebaseDatabase.getInstance().getReference().child("Client_requests");
-//
-//                HashMap Daddy = new HashMap();
-//                reff.addChildEventListener(new ChildEventListener() {
-//                    @Override
-//                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                        HashMap document = new HashMap();
-//                        HashMap formulaire = new HashMap();
-//                        if(snapshot.getKey().equals("document")){
-//                            for (DataSnapshot k : snapshot.getChildren()){
-//                                document.put(k.getKey(),k.getValue());
-//                            }
-//                            Daddy.put("document",document);
-//                        }
-//                        if(snapshot.getKey().equals("formulaire")){
-//                            for (DataSnapshot k : snapshot.getChildren()){
-//                                formulaire.put(k.getKey(),k.getValue());
-//                            }
-//                            Daddy.put("formulaire",formulaire);
-//                        }
-//                        if(snapshot.getKey().equals("employeeUsername")){
-//                            Daddy.put(snapshot.getKey(),snapshot.getValue());
-//                        }
-//                       // memap.put(snapshot.getKey(), snapshot.toString());
-//                        Log.d(TAG, Daddy.toString());
-//                        //reff2.child(username).child(services.get(position)).setValue(Daddy);
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
+
+            }
+        });
+        myList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder build = new AlertDialog.Builder(ClientServiceDisplay.this);
+                build.setMessage("No ratings so far");
+
+                reff2.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        Log.d(TAG, snapshot.getKey());
+                        if(services.contains(snapshot.getKey())){
+                            messageChanger("Rating is "+ snapshot.child("rating").getValue());
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                build.setMessage(message);
+                messageChanger("No ratings so far");
+                AlertDialog alert = build.create();
+                alert.show();
+                return true;
             }
         });
 
+    }
+    public void messageChanger(String message2){
+        message = message2;
     }
 }

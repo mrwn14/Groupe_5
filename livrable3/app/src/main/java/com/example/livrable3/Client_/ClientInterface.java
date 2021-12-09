@@ -69,7 +69,7 @@ public class ClientInterface extends AppCompatActivity {
         ref1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    if(!myArray1.contains(snapshot.getKey())){
+                if(!myArray1.contains(snapshot.getKey())){
                         myArray1.add(snapshot.getKey());
                     }
                 myAdapter1.notifyDataSetChanged();
@@ -98,9 +98,7 @@ public class ClientInterface extends AppCompatActivity {
         ref2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                for(DataSnapshot ds : snapshot.getChildren()){
-                    myArray2.add(ds.getKey());
-                }
+                myArray2.add(snapshot.getKey());
                 myAdapter2.notifyDataSetChanged();
             }
 

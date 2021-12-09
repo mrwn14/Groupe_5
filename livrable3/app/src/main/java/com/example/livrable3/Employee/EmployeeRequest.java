@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import java.util.HashMap;
 public class EmployeeRequest extends AppCompatActivity {
     DatabaseReference reff;
     DatabaseReference reff2;
+    DatabaseReference reff3;
     ArrayList<String> correctDocs;
     ArrayList<String> correctDocs2;
     ArrayList<String> notCorrectDocs;
@@ -97,20 +99,30 @@ public class EmployeeRequest extends AppCompatActivity {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String clientWithSpace = correctDocs2.get(position).split("from")[0];
-                                topSender(clientWithSpace.substring(0,clientWithSpace.length()-1));
+                                String serviceWithSpace = correctDocs2.get(position).split("from")[0];
+                                String clientWithSpace = correctDocs2.get(position).split("from")[1];
+
+                                client = clientWithSpace.substring(1,clientWithSpace.length());
+                                Log.d("log", "CLIENT VALUEEEE " +client);
+                                topSender(serviceWithSpace.substring(0,serviceWithSpace.length()-1), 1);
+
                                 correctDocs.add(correctDocs2.get(position));
                                 correctDocs2.remove(position);
                                 add();
 
                                 myAdapter.notifyDataSetChanged();
                                 myAdapter2.notifyDataSetChanged();
-
                             }
                         })
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                String serviceWithSpace = correctDocs2.get(position).split("from")[0];
+                                String clientWithSpace = correctDocs2.get(position).split("from")[1];
+
+                                client = clientWithSpace.substring(1,clientWithSpace.length());
+                                topSender(serviceWithSpace.substring(0,serviceWithSpace.length()-1), 0);
+
                                 reff.child(correctDocs2.get(position)).removeValue();
                                 correctDocs2.remove(position);
                                 myAdapter.notifyDataSetChanged();
@@ -123,6 +135,20 @@ public class EmployeeRequest extends AppCompatActivity {
                 alert.show();
             }
         });
+        choicelistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent hamid = new Intent(getApplicationContext(), EmployeClientInfo.class);
+                hamid.putExtra("username", username);
+                hamid.putExtra("client", client);
+                String serviceWithSpace = correctDocs2.get(position).split("from")[0];
+                String service = serviceWithSpace.substring(0,serviceWithSpace.length()-1);
+                hamid.putExtra("service", service);
+                startActivity(hamid);
+                return true;
+            }
+        });
+
         choicelistview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,6 +160,7 @@ public class EmployeeRequest extends AppCompatActivity {
 
             }
         });
+
     }
 
     public void add() {
@@ -156,14 +183,19 @@ public class EmployeeRequest extends AppCompatActivity {
         });
 
     }
-    public void topSender(String service){
+    public void topSender(String service, int binary){
         reff2 = FirebaseDatabase.getInstance().getReference().child("Client_requests");
+        reff3 = FirebaseDatabase.getInstance().getReference().child("Requests").child(username).child("pending");
         reff2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
                 if(snapshot.getKey().equals(client)){
-                    snapshot.child("approved").getRef().setValue(service);
+                    if(binary == 1) {
+                        snapshot.child("approved").child(service).getRef().setValue("approved :p");
+                    }
                     snapshot.child("pending").child(service).getRef().removeValue();
+                    reff3.child(service+"_"+client).removeValue();
                 }
             }
 

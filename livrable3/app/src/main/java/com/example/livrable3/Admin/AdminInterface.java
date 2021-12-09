@@ -25,6 +25,7 @@ public class AdminInterface extends AppCompatActivity {
         Intent theSucc = new Intent(getApplicationContext(), ServicesDisplay.class);
         theSucc.putExtra("role","Employé(e)");
         theSucc.putExtra("case","General");
+        theSucc.putExtra("username","NONE");
         startActivity(theSucc);
     }
     public void EmployeeButtonOnClick(View view){
