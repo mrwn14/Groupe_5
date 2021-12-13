@@ -26,7 +26,6 @@ public class ClientRatingActivity extends AppCompatActivity {
     String employee;
     float rating;
     int num;
-    String dialog;
     RatingBar hamid;
     int verificator = 0;
     boolean tester = false;

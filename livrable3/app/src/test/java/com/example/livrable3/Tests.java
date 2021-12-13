@@ -66,6 +66,13 @@ public class Tests {
         assertEquals(expected,actual);
     }
     @Test
+    public void test2NomValidateur(){
+        String testerValue = "Jonathon";
+        boolean actual = ClientServiceRequest.nomValidator(testerValue);
+        boolean expected = true;
+        assertEquals(expected,actual);
+    }
+    @Test
     public void testDateDeNaissanceValidateur(){
         String testerValue = "1/2/2002";
         boolean actual = ClientServiceRequest.dateDeNaissanceValidator(testerValue);

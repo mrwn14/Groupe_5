@@ -110,7 +110,7 @@
       <recent name="com.example.livrable3" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'com.example.livrable3'">
+  <component name="RunManager" selected="Android App.app">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="livrable_3_bruh.app" />
       <option name="DEPLOY" value="true" />
@@ -215,8 +215,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'com.example.livrable3'" />
         <item itemvalue="Gradle.Tests" />
+        <item itemvalue="Gradle.Tests in 'com.example.livrable3'" />
       </list>
     </recent_temporary>
   </component>
