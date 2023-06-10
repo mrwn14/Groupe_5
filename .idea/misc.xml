@@ -1,0 +1,41 @@
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.2046875" />
+        <entry key="..\:/Users/Marouane/Desktop/SEG2505/Groupe_5/livrable3/app/src/main/res/layout/activity_employee_interface.xml" value="0.1331521739130435" />
+        <entry key="..\:/Users/Marouane/Desktop/SEG2505/Groupe_5/livrable3/app/src/main/res/layout/activity_employee_request.xml" value="0.1331521739130435" />
+        <entry key="..\:/Users/Marouane/Desktop/SEG2505/Groupe_5/livrable3/app/src/main/res/layout/activity_employee_service_choice.xml" value="0.1331521739130435" />
+        <entry key="..\:/Users/Marouane/Desktop/livrable3/app/src/main/res/layout/activity_Succ_Info.xml" value="0.1408514492753623" />
+        <entry key="..\:/Users/Marouane/Desktop/livrable3/app/src/main/res/layout/activity_employee_interface.xml" value="0.1" />
+        <entry key="..\:/Users/Marouane/Desktop/livrable3/app/src/main/res/layout/activity_service_generaux.xml" value="0.1" />
+        <entry key="..\:/Users/Marouane/Desktop/livrable3/app/src/main/res/layout/activity_services_display.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/activity_admin_interface.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_client_rating.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_client_service_display.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_client_service_request.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_days.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_employe_client_info.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_employee_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_employee_interface.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/activity_employee_request.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_employee_service_choice.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/activity_purchase.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_service_editor.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/activity_service_editor2.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/activity_service_generaux.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/activity_services_display.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_succ_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_succ_info.xml" value="0.15670289855072464" />
+        <entry key="app/src/main/res/layout/activity_time.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_welcome_page.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK" />
+</project>
